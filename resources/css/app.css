@@ -1,0 +1,277 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+
+@import "flatpickr/dist/flatpickr.min.css";
+@import "selectize.css";
+@import "datatables.css";
+/* Variables */
+/* @import "variables"; */
+
+/* Bootstrap */
+/* @import "bootstrap/scss/bootstrap"; */
+
+/* DataTables */
+@import "bootstrap-icons/font/bootstrap-icons.css";
+/* @import "datatables.net-bs5/css/dataTables.bootstrap5.min.css";
+@import "datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css";
+@import "datatables.net-select-bs5/css/select.bootstrap5.css"; */
+
+/* Custom */
+.btn {
+  @apply px-6;
+  &.btn-sm {
+    @apply px-4;
+  }
+  &.btn-circle {
+    @apply p-0;
+  }
+}
+
+.dropdown {
+  &.dropdown-fixed {
+    .dropdown-content {
+      @apply fixed;
+    }
+  }
+}
+
+.colored-toast {
+  &.swal2-icon-success {
+    @apply !bg-success;
+  }
+  .swal2-title,
+  .swal2-close,
+  .swal2-html-container {
+    @apply text-white;
+  }
+}
+
+.table {
+  @apply w-full;
+  thead {
+    th {
+      @apply px-3 py-3 text-xs border-b normal-case;
+    }
+  }
+  &.dataTable {
+    @apply !w-full !mt-4 !mb-2 border rounded-lg;
+    :where(th, td) {
+      @apply px-3 py-2.5 text-sm border-gray-200;
+    }
+    :where(thead, tfoot) :where(th, td) {
+      @apply bg-gray-100;
+    }
+    thead {
+      th {
+        @apply px-3 py-3 text-xs border-b normal-case;
+      }
+    }
+    &.table-striped > tbody > tr.odd > * {
+      @apply shadow-none;
+    }
+    &.table-hover > tbody > tr:hover > *,
+    &.table-hover > tbody > tr.selected:hover > * {
+      /* @apply shadow-[inset_0_0_0_9999px_rgba(0,0,0,0.03)]; */
+      @apply shadow-none;
+      @apply bg-gray-50;
+    }
+    > tbody > tr.selected > *,
+    &.table-striped > tbody > tr.odd.selected > * {
+      @apply bg-inherit text-inherit shadow-none;
+    }
+    &.table-hover > tbody > tr.selected:hover > * {
+      @apply bg-gray-50;
+    }
+    & > tbody > tr.selected a {
+      @apply text-primary;
+    }
+    thead > tr > {
+      th,
+      td {
+        &.sorting:before,
+        &.sorting:after,
+        &.sorting_asc:before,
+        &.sorting_asc:after,
+        &.sorting_desc:before,
+        &.sorting_desc:after,
+        &.sorting_asc_disabled:before,
+        &.sorting_asc_disabled:after,
+        &.sorting_desc_disabled:before,
+        &.sorting_desc_disabled:after,
+        &.sorting:before,
+        &.sorting:after,
+        &.sorting_asc:before,
+        &.sorting_asc:after,
+        &.sorting_desc:before,
+        &.sorting_desc:after,
+        &.sorting_asc_disabled:before,
+        &.sorting_asc_disabled:after,
+        &.sorting_desc_disabled:before,
+        &.sorting_desc_disabled:after {
+          font-size: 0.6em;
+          line-height: 7px;
+        }
+      }
+    }
+    &.dtr-column > tbody > {
+      tr {
+        > td,
+        > th {
+          &.dtr-control,
+          &.control {
+            @apply text-right;
+            &:before {
+              content: "";
+              @apply static mt-0 ml-0 shadow-none text-white text-lg inline-block bg-transparent h-1.5 w-1.5 border-r-2 border-b-2 border-t-0 border-l-0 border-solid border-gray-400 rotate-45 rounded-none -translate-y-1/2 -translate-x-1/2 transition-all duration-300;
+            }
+          }
+        }
+        &.parent {
+          td,
+          th {
+            &.dtr-control,
+            &.control {
+              &:before {
+                content: "";
+                @apply bg-transparent rotate-[225deg] -translate-y-0;
+              }
+            }
+          }
+        }
+      }
+    }
+    > tbody > tr.parent {
+      > td {
+        @apply border-transparent;
+      }
+    }
+    > tbody > tr.child {
+      td.child {
+        @apply bg-slate-50 border-b-2;
+      }
+      ul.dtr-details {
+        > li {
+          padding: 0 0;
+          border-bottom: none;
+          &:first-child {
+            padding-top: 0em;
+          }
+          &:last-child {
+            border-bottom: none;
+          }
+        }
+      }
+      span.dtr-title {
+        @apply inline-block min-w-[90px] text-xs uppercase text-gray-400 leading-5;
+      }
+      span.dtr-data {
+        @apply inline-block;
+      }
+    }
+  }
+}
+
+div.dataTables_processing {
+  @apply mt-0;
+  > div:last-child > div {
+    @apply bg-primary w-2.5 h-2.5;
+  }
+}
+
+div.dataTables_wrapper {
+  .row {
+    @apply flex flex-wrap md:flex-nowrap;
+    .col-sm-12 {
+      @apply w-full;
+    }
+    .col-md-5 {
+      @apply w-full md:w-5/12;
+    }
+    .col-md-6 {
+      @apply w-full md:w-1/2;
+    }
+    .col-md-7 {
+      @apply w-full md:w-7/12;
+    }
+  }
+  div.dataTables_length {
+    @apply text-sm pt-2;
+    select {
+      @apply border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md;
+      @apply text-sm px-2 py-1.5 pr-8;
+    }
+  }
+  div.dataTables_filter {
+    label {
+      @apply flex items-center text-sm gap-x-2;
+    }
+    .form-control {
+      @apply border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md ml-0 text-sm leading-6;
+    }
+  }
+  div.dataTables_info {
+    @apply text-sm pt-2;
+  }
+  div.dataTables_paginate {
+    @apply flex justify-end pt-2;
+    ul.pagination {
+      @apply m-0 flex text-sm;
+      .page-link {
+        @apply inline-block bg-base-200 border border-base-300 px-3 py-1.5 -ml-px hover:bg-base-300;
+      }
+      .previous {
+        .page-link {
+          @apply rounded-l-md;
+        }
+      }
+      .next {
+        .page-link {
+          @apply rounded-r-md;
+        }
+      }
+      .paginate_button {
+        &.active {
+          .page-link {
+            @apply bg-primary text-white border-primary;
+          }
+        }
+        &.disabled {
+          .page-link {
+            @apply text-gray-400 hover:text-gray-400 hover:bg-base-200 cursor-not-allowed;
+          }
+        }
+      }
+    }
+  }
+  div.dt-buttons {
+    @apply text-right flex items-center gap-x-3;
+    .btn {
+      &.btn-primary {
+        @apply min-h-[42px] h-[42px] px-4 inline-flex gap-x-2 text-xs normal-case rounded-md bg-gray-100 border-gray-300 text-gray-500 hover:bg-gray-100 hover:shadow-md transition duration-200;
+        > span {
+          @apply inline-flex items-center gap-x-1;
+        }
+        .uil {
+          @apply text-[20px];
+        }
+      }
+    }
+  }
+  span.select-info {
+    @apply hidden;
+  }
+}
+
+#table-item-request {
+  tbody {
+    tr {
+      td {
+        @apply cursor-pointer;
+      }
+    }
+  }
+}

@@ -20,7 +20,7 @@ return new class extends Migration
       $table->boolean('existing')->nullable();
       $table->foreignId('customer_type_id')->nullable()->constrained('customer_types');
       $table->foreignId('current_salesman_id')->nullable()->constrained('users');
-      $table->foreignId('previous_salesman_id')->nullable()->constrained('users');
+      $table->string('previous_salesman')->nullable();
       $table->text('notes')->nullable();
       $table->foreignId('user_id')->constrained('users');
       $table->timestamps();

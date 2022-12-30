@@ -83,17 +83,7 @@ class ItemRequestsDataTable extends DataTable
       ->buttons($this->getButtons())
       ->lengthMenu([[10, 25, 50, 100, 250, 500, 1000, -1], [10, 25, 50, 100, 250, 500, 1000, "All"]])
       ->pageLength(50)
-      ->language(["search" => '<span>Search</span>', "searchPlaceholder" => 'Search records'])
-      ->parameters([
-        //"lengthMenu" => [[10, 25, 50, 100, 250, 500, 1000, -1], [10, 25, 50, 100, 250, 500, 1000, "All"]],
-        //"order" => [[0, 'desc']],
-        // "responsive" => [
-        //   "details" => [
-        //     "type" => 'column',
-        //     "target" => -1
-        //   ]
-        // ]
-      ]);
+      ->language(["search" => '<span>Search</span>', "searchPlaceholder" => 'Search records']);
   }
 
   public function getButtons(): array
@@ -106,20 +96,20 @@ class ItemRequestsDataTable extends DataTable
         ->text('<i class="uil uil-file-upload"></i><span>Export</span>');
       array_push($buttons, $button_export);
     }
-    if (auth()->user()->can('import requests')) {
-      $button_import = [
-        "text" => '<i class="uil uil-file-download"></i><span>Import</span>',
-        "action" => "function ( e, dt, node, config ) {
-          //console.log('e:', e);
-          //console.log('dt:', dt);
-          //console.log('node:', node);
-          //console.log('config:', config);
-          $('#import-item-request').prop('checked', true);
-        }",
-        "className" => 'btn-primary'
-      ];
-      array_push($buttons, $button_import);
-    }
+    // if (auth()->user()->can('import requests')) {
+    //   $button_import = [
+    //     "text" => '<i class="uil uil-file-download"></i><span>Import</span>',
+    //     "action" => "function ( e, dt, node, config ) {
+    //       //console.log('e:', e);
+    //       //console.log('dt:', dt);
+    //       //console.log('node:', node);
+    //       //console.log('config:', config);
+    //       $('#import-item-request').prop('checked', true);
+    //     }",
+    //     "className" => 'btn-primary'
+    //   ];
+    //   array_push($buttons, $button_import);
+    // }
     return $buttons;
     // return [
     //   Button::make('excel')

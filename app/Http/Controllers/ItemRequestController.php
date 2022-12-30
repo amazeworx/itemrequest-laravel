@@ -27,7 +27,7 @@ class ItemRequestController extends Controller
   {
     $item_requests = ItemRequest::orderBy('request_date', 'desc')->orderBy('id', 'desc')->get();
     $products = Product::all();
-    $salesmans = User::where('role', 'Sales')->orderBy('name', 'asc')->get(['id', 'name', 'active']);
+    $salesmans = User::role('sales')->orderBy('name', 'asc')->get(['id', 'name', 'active']);
     $customers = Customer::all();
     $customertypes = CustomerType::all();
     $statuses = StatusRequest::all();

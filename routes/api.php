@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\CustomerController;
 use App\Http\Controllers\Api\ItemRequestController;
+use App\Http\Controllers\Api\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResource('item_request', ItemRequestController::class, ['as' => 'api']);
 Route::apiResource('product', ProductController::class, ['as' => 'api']);
 Route::apiResource('customer', CustomerController::class, ['as' => 'api']);
+
+Route::post('user', [UserController::class, 'store'])->name('api.user.create');
+Route::get('user/{user}', [UserController::class, 'show'])->name('api.user.show');
+Route::put('user/{user}', [UserController::class, 'update'])->name('api.user.update');
+Route::delete('user/{user}', [UserController::class, 'destroy'])->name('api.user.destroy');
 
 Route::get('search/product', [ProductController::class, 'search'])->name('api.search.product');
 Route::get('search/customer', [CustomerController::class, 'search'])->name('api.search.customer');

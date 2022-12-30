@@ -7,16 +7,24 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Redirect;
+use App\DataTables\UsersDataTable;
+use Spatie\Permission\Traits\HasRoles;
+
+use DataTables;
 
 class UserController extends Controller
 {
+  use HasRoles;
   /**
    * Display a listing of the resource.
    *
    * @return \Illuminate\Http\Response
    */
-  public function index()
+  public function index(UsersDataTable $dataTable)
   {
+    return $dataTable
+      ->render('pages.user.index');
+
     $data = User::with('roles')->get();
     return view('pages.user.index')->with('data', $data);
   }

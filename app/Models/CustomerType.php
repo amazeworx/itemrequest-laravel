@@ -12,6 +12,6 @@ class CustomerType extends Model
 
   public function customers()
   {
-    return $this->hasMany(Customer::class, 'customer_type_id');
+    return $this->hasMany(Customer::class, 'customer_type_id')->withTrashed();
   }
 }

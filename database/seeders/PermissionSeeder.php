@@ -110,7 +110,6 @@ class PermissionSeeder extends Seeder
       'username' => 'johnwick',
       'email' => 'johnwick@yopmail.com',
       'whatsapp' => '08123456789',
-      'role' => 'Super Admin',
       'active' => 1,
       'password' => bcrypt('11223344')
     ]);
@@ -121,7 +120,6 @@ class PermissionSeeder extends Seeder
       'username' => 'brucewayne',
       'email' => 'brucewayne@yopmail.com',
       'whatsapp' => '08123456789',
-      'role' => 'Sales',
       'active' => 1,
       'password' => bcrypt('11223344')
     ]);
@@ -132,30 +130,7 @@ class PermissionSeeder extends Seeder
       'username' => 'clarkkent',
       'email' => 'clarkkent@yopmail.com',
       'whatsapp' => '08123456789',
-      'role' => 'Sales',
       'active' => 1,
-      'password' => bcrypt('11223344')
-    ]);
-    $user->assignRole($salesRole);
-
-    $user = User::factory()->create([
-      'name' => 'Tony Stark',
-      'username' => 'tonystark',
-      'email' => 'tonystark@yopmail.com',
-      'whatsapp' => '08123456789',
-      'role' => 'Sales',
-      'active' => 0,
-      'password' => bcrypt('11223344')
-    ]);
-    $user->assignRole($salesRole);
-
-    $user = User::factory()->create([
-      'name' => 'Peter Parker',
-      'username' => 'peterparker',
-      'email' => 'peterparker@yopmail.com',
-      'whatsapp' => '08123456789',
-      'role' => 'Sales',
-      'active' => 0,
       'password' => bcrypt('11223344')
     ]);
     $user->assignRole($salesRole);
@@ -165,7 +140,6 @@ class PermissionSeeder extends Seeder
       'username' => 'galgadot',
       'email' => 'galgadot@yopmail.com',
       'whatsapp' => '08123456789',
-      'role' => 'Purchasing',
       'active' => 1,
       'password' => bcrypt('11223344')
     ]);
@@ -176,7 +150,6 @@ class PermissionSeeder extends Seeder
       'username' => 'blackwidow',
       'email' => 'blackwidow@yopmail.com',
       'whatsapp' => '08123456789',
-      'role' => 'Purchasing',
       'active' => 1,
       'password' => bcrypt('11223344')
     ]);

@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
 
 use App\DataTables\ProductsDataTable;
-//use Yajra\DataTables\Facades\DataTables;
 use DataTables;
 
 class ProductController extends Controller

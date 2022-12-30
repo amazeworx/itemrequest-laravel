@@ -2,6 +2,7 @@
   <input type="checkbox" id="create-customer" class="modal-toggle" />
   <div class="modal z-40">
     <div class="modal-box p-0 relative">
+      <label for="create-customer" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
       <div class="p-6">
         <h3 class="mb-4 text-xl font-medium text-gray-900">{{ __('Add New Customer') }}</h3>
         <div class="mt-6 space-y-4">
@@ -99,3 +100,63 @@
     </div>
   </div>
 </div>
+
+@push('scripts')
+<script type="text/javascript">
+  $(function () {
+    $("input[name=create_customer_existing]").change(function() {
+      if ($("#create_customer_existing-true").is(':checked')) {
+        $("#create_customer_salesman_previous_container").show();
+      } else {
+        $("#create_customer_salesman_previous").val('');
+        $("#create_customer_salesman_previous_container").hide();
+      }
+    });
+    $(document).on("click", "#btn-cancel-create-customer", function(e) {
+      $('#create-customer').prop('checked', false);
+    });
+    $(document).on("click", "#btn-submit-create-customer", function(e) {
+        let name = $('#create_customer_name').val();
+        let phone = $('#create_customer_phone').val();
+        let customer_type_id = $('input[name="create_customer_type_id"]:checked').val();
+        let existing = $('input[name="create_customer_existing"]:checked').val();
+        let current_salesman_id = $('#create_customer_salesman_current').val();
+        let previous_salesman = $('#create_customer_salesman_previous').val();
+        let notes = $('#create_customer_notes').val();
+        let user_id = $('#create_customer_user_id').val();
+        let token   = $("meta[name='csrf-token']").attr("content");
+
+        $.ajax({
+          url: `/api/customer`,
+          type: "POST",
+          cache: false,
+          data: {
+            "name": name,
+            "phone": phone,
+            "customer_type_id": customer_type_id,
+            "existing": existing,
+            "current_salesman_id": current_salesman_id,
+            "previous_salesman": previous_salesman,
+            "notes": notes,
+            "user_id": user_id,
+            "_token": token
+          },
+          success: function(response) {
+            $('#create-customer').prop('checked', false);
+            window.location.href = "{{url('/customer?status=customer-created')}}";
+          },
+          error: function(error) {
+            //...
+            //console.log(error);
+            $('#create-customer-error-message').show();
+            if(error.responseJSON.name) {
+              $('#create_customer_name').addClass('input-error');
+            } else {
+              $('#create_customer_name').removeClass('input-error');
+            }
+          }
+        });
+      });
+  });
+</script>
+@endpush

@@ -22,12 +22,19 @@
 
 /* Custom */
 .btn {
-  @apply px-6;
+  @apply px-4 h-10 min-h-[40px] text-sm normal-case;
   &.btn-sm {
     @apply px-4;
   }
   &.btn-circle {
     @apply p-0;
+    &:where(.btn-sm) {
+      height: 2rem;
+      width: 2rem;
+      border-radius: 9999px;
+      padding: 0px;
+      min-height: 2rem;
+    }
   }
 }
 
@@ -282,7 +289,9 @@ div.dataTables_wrapper {
 }
 
 #table-item-request,
-#table-products {
+#table-products,
+#table-customers,
+#table-users {
   tbody {
     tr {
       td {
@@ -290,4 +299,8 @@ div.dataTables_wrapper {
       }
     }
   }
+}
+
+.input-error {
+  @apply !border-red-500;
 }

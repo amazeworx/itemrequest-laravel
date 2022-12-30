@@ -73,12 +73,12 @@ class ItemRequestController extends Controller
    */
   public function show($item_request)
   {
-    $item = ItemRequest::where('id', $item_request)->first();
-    $product = Product::where('id', $item->product_id)->first();
-    $customer = Customer::where('id', $item->customer_id)->first();
+    $item = ItemRequest::where('id', $item_request)->withTrashed()->first();
+    $product = Product::where('id', $item->product_id)->withTrashed()->first();
+    $customer = Customer::where('id', $item->customer_id)->withTrashed()->first();
     $customer_type = CustomerType::where('id', $customer->customer_type_id)->first();
-    $salesman = User::where('id', $item->salesman_id)->first();
-    $current_salesman = User::where('id', $customer->current_salesman_id)->first();
+    $salesman = User::where('id', $item->salesman_id)->withTrashed()->first();
+    $current_salesman = User::where('id', $customer->current_salesman_id)->withTrashed()->first();
     $previous_salesman = User::where('id', $customer->previous_salesman_id)->first();
     $user = User::where('id', $item->user_id)->first();
     $status = StatusRequest::where('id', $item->status_id)->first();

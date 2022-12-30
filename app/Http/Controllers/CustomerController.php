@@ -5,21 +5,29 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use App\Models\CustomerType;
 use App\Models\User;
+use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use App\DataTables\CustomersDataTable;
+use Spatie\Permission\Traits\HasRoles;
+use DataTables;
 
 class CustomerController extends Controller
 {
+  use HasRoles;
   /**
    * Display a listing of the resource.
    *
    * @return \Illuminate\Http\Response
    */
-  public function index()
+  public function index(CustomersDataTable $dataTable)
   {
-    $data = Customer::all();
-    return view('pages.customer.index')->with('data', $data);
+    $salesmans = User::role('sales')->orderBy('name', 'asc')->get(['id', 'name', 'active']);
+    $customertypes = CustomerType::all();
+    $user_id = Auth::id();
+    return $dataTable->with('user_id', $user_id)
+      ->render('pages.customer.index', compact('salesmans', 'customertypes'));
   }
 
   /**

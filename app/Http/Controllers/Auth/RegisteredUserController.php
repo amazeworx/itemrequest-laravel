@@ -10,9 +10,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Spatie\Permission\Traits\HasRoles;
 
 class RegisteredUserController extends Controller
 {
+  use HasRoles;
   /**
    * Display the registration view.
    *
@@ -46,6 +48,12 @@ class RegisteredUserController extends Controller
       'whatsapp' => $request->whatsapp,
       'password' => Hash::make($request->password),
     ]);
+
+    if ($request->role) {
+      $user->assignRole($request->role);
+    } else {
+      $user->assignRole('sales');
+    }
 
     event(new Registered($user));
 

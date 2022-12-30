@@ -148,6 +148,12 @@
       > td {
         @apply border-transparent;
       }
+      &:hover {
+        > th,
+        td {
+          @apply bg-white;
+        }
+      }
     }
     > tbody > tr.child {
       td.child {
@@ -166,10 +172,16 @@
         }
       }
       span.dtr-title {
-        @apply inline-block min-w-[90px] text-xs uppercase text-gray-400 leading-5;
+        @apply inline-block min-w-[130px] text-xs uppercase text-gray-400 leading-5;
       }
       span.dtr-data {
         @apply inline-block;
+      }
+    }
+    > tbody > tr:hover {
+      > th,
+      td {
+        @apply bg-slate-50;
       }
     }
   }
@@ -248,7 +260,7 @@ div.dataTables_wrapper {
     }
   }
   div.dt-buttons {
-    @apply text-right flex items-center gap-x-3;
+    @apply text-right flex items-center space-x-3;
     .btn {
       &.btn-primary {
         @apply min-h-[42px] h-[42px] px-4 inline-flex gap-x-2 text-xs normal-case rounded-md bg-gray-100 border-gray-300 text-gray-500 hover:bg-gray-100 hover:shadow-md transition duration-200;
@@ -259,6 +271,9 @@ div.dataTables_wrapper {
           @apply text-[20px];
         }
       }
+      &:first-child {
+        @apply ml-3;
+      }
     }
   }
   span.select-info {
@@ -266,7 +281,8 @@ div.dataTables_wrapper {
   }
 }
 
-#table-item-request {
+#table-item-request,
+#table-products {
   tbody {
     tr {
       td {

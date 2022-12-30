@@ -20,6 +20,7 @@ return new class extends Migration
       $table->foreignId('salesman_id')->constrained('users');
       $table->foreignId('customer_id')->constrained('customers');
       $table->foreignId('product_id')->constrained('products');
+      $table->string('supplier')->nullable();
       $table->text('notes')->nullable();
       $table->foreignId('status_id')->constrained('status_requests');
       $table->foreignId('user_id')->constrained('users');

@@ -6,6 +6,9 @@ use App\Models\Product;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\ProductsImport;
 
 class ProductController extends Controller
 {
@@ -98,6 +101,35 @@ class ProductController extends Controller
    */
   public function show($product)
   {
+
+    $item = Product::where('id', $product)->first();
+
+    $data = [
+      'id' => $item->id,
+      'name' => $item->name,
+      'sku' => $item->sku,
+      'brand' => $item->brand,
+      'year' => $item->year,
+      'cc' => $item->cc,
+      'engine' => $item->engine,
+      'price_buy' => $item->price_buy,
+      'price_resell' => $item->price_resell,
+      'price_retail' => $item->price_retail,
+      'notes' => $item->notes,
+      'user' => [
+        'id' => $item->user_id,
+        'name' => $item->user->name,
+      ],
+      'created_at' => $item->created_at,
+      'updated_at' => $item->updated_at,
+      'deleted_at' => $item->deleted_at
+    ];
+    //return response
+    return response()->json([
+      'success' => true,
+      'message' => 'Detail Data Product',
+      'data'    => $data
+    ]);
   }
 
   /**
@@ -120,6 +152,35 @@ class ProductController extends Controller
    */
   public function update(Request $request, Product $product)
   {
+    $validator = Validator::make($request->all(), [
+      'name' => 'required',
+    ]);
+
+    //check if validation fails
+    if ($validator->fails()) {
+      return response()->json($validator->errors(), 422);
+    }
+
+    // update product
+    $product->update([
+      'name' => $request->name,
+      'sku' => $request->sku,
+      'brand' => $request->brand,
+      'year' => $request->year,
+      'cc' => $request->cc,
+      'engine' => $request->engine,
+      'price_buy' => $request->price_buy,
+      'price_resell' => $request->price_resell,
+      'price_retail' => $request->price_retail,
+      'notes' => $request->notes,
+    ]);
+
+    //return response
+    return response()->json([
+      'success' => true,
+      'message' => 'Product berhasil disimpan.',
+      'data'    => $product
+    ]);
   }
 
   /**
@@ -133,5 +194,29 @@ class ProductController extends Controller
     Product::where('id', $product->id)->delete();
 
     return response()->json("Product Deleted");
+  }
+
+  public function import(Request $request)
+  {
+
+    $user_id = $request->user_id;
+
+    $data = array();
+
+    if ($request->file('file')) {
+
+      $import = Excel::import(new ProductsImport($user_id), $request->file('file'));
+
+      // Response
+      $data['success'] = 1;
+      $data['message'] = 'Uploaded Successfully!';
+      $data['data'] = $import;
+    } else {
+      // Response
+      $data['success'] = 2;
+      $data['message'] = 'File not uploaded.';
+    }
+
+    return response()->json($data);
   }
 }

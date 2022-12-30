@@ -31,7 +31,7 @@ class ItemRequestController extends Controller
     $customers = Customer::all();
     $customertypes = CustomerType::all();
     $statuses = StatusRequest::all();
-    $user_id = $id = Auth::id();
+    $user_id = Auth::id();
 
     return $dataTable->with('user_id', $user_id)
       ->render('pages.item-request.index-datatable', compact('item_requests', 'products', 'salesmans', 'customers', 'customertypes', 'statuses'));

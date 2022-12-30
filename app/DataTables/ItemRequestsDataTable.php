@@ -13,6 +13,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 use Spatie\Permission\Traits\HasRoles;
+use Spatie\Permission\Models\Role;
 
 class ItemRequestsDataTable extends DataTable
 {
@@ -54,11 +55,12 @@ class ItemRequestsDataTable extends DataTable
   {
     //return $model->newQuery();
     $user_id = $this->user_id;
-    $get_user_role = User::where('id', $user_id)->first();
-    if ($get_user_role->role == 'Sales') {
-      return ItemRequest::where('salesman_id', $user_id)->with(['product', 'customer', 'salesman', 'status']);
+    $get_user = User::where('id', $user_id)->first();
+
+    if ($get_user->hasRole('sales')) {
+      return ItemRequest::where('salesman_id', $user_id)->with(['product', 'customer', 'salesman', 'status', 'user']);
     } else {
-      return ItemRequest::with(['product', 'customer', 'salesman', 'status']);
+      return ItemRequest::with(['product', 'customer', 'salesman', 'status', 'user']);
     }
   }
 
@@ -77,9 +79,7 @@ class ItemRequestsDataTable extends DataTable
       ->minifiedAjax()
       ->orderBy(0)
       ->selectStyleSingle()
-      //->dom('Bfrtip')
-      //->dom("<'row'<'col-sm-12'B>><'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>><'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>")
-      ->dom("<'flex justify-end gap-x-3'fB><tr><'flex justify-between'lp>")
+      ->dom("<'flex justify-end'fB><tr><'flex justify-between'lp>")
       ->buttons($this->getButtons())
       ->lengthMenu([[10, 25, 50, 100, 250, 500, 1000, -1], [10, 25, 50, 100, 250, 500, 1000, "All"]])
       ->pageLength(50)
@@ -183,8 +183,18 @@ class ItemRequestsDataTable extends DataTable
       Column::make('product.cc')
         ->title('CC')
         ->content('-')
-        ->responsivePriority(8)
+        ->responsivePriority(9)
         ->addClass('none'),
+      Column::make('product.engine')
+        ->title('Tipe Mesin')
+        ->content('-')
+        ->responsivePriority(10)
+        ->addClass('none'),
+      Column::make('user.name')
+        ->title('Created By')
+        ->content('-')
+        ->addClass('none')
+        ->responsivePriority(10),
       Column::computed('control')
         ->title('')
         ->className('dtr-control')
@@ -192,6 +202,7 @@ class ItemRequestsDataTable extends DataTable
         ->exportable(false)
         ->orderable(false)
         ->printable(false)
+        ->responsivePriority(1)
       // Column::computed('action')->title('')
       //   ->exportable(false)
       //   ->printable(false)

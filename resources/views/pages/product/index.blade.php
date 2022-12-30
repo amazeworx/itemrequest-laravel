@@ -1,81 +1,374 @@
+@php
+$current_user_id = auth()->user()->id;
+@endphp
+
 <x-app-layout>
   <x-slot name="header">
-    <div class="flex justify-between">
+    <div class="flex justify-between items-center">
       <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
         {{ __('Products') }}
       </h2>
-      <x-buttons.button-link-primary :href="route('product.create')">{{ __('Add Product') }}
-      </x-buttons.button-link-primary>
+      @can('create requests')
+      <label for="create-product" class="btn btn-primary">{{ __('Add Product') }}</label>
+      @endcan
     </div>
   </x-slot>
 
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-      @if (session('status') === 'product-deleted' || request("status") === 'product-deleted')
-      <x-alert alert-id="alert-success" :icon="true" :dismiss="true">
-        {{ __('Product successfully deleted.') }}
-      </x-alert>
-      @endif
-
       <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-        <div class="text-gray-900 dark:text-gray-100">
+        <div class="text-gray-900 dark:text-gray-100 p-6">
 
-          <div class="overflow-x-auto relative">
-            <table class="w-full text-sm text-left text-gray-500">
-              <thead class="text-xs text-gray-700 uppercase bg-gray-50 border-b">
-                <tr>
-                  <th scope="col" class="py-3 px-6">
-                    Nama Barang
-                  </th>
-                  <th scope="col" class="py-3 px-6">
-                    SKU
-                  </th>
-                  <th scope="col" class="py-3 px-6">
-                    Brand
-                  </th>
-                  <th scope="col" class="py-3 px-6">
-                    <span class="sr-only">Edit</span>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach ($data as $product)
-                <tr class="bg-white border-b hover:bg-gray-50 ">
-                  <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    {{ $product->name }}
-                  </th>
-                  <td class="py-4 px-6">
-                    {{ $product->sku }}
-                  </td>
-                  <td class="py-4 px-6">
-                    {{ $product->brand }}
-                  </td>
-                  <td class="py-4 px-6 text-right space-x-3">
-                    <a href="/product/{{ $product->id }}/edit"
-                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
-                    <a href="/product/{{ $product->id }}/edit"
-                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                    <a href="#!" data-id="{{ $product->id }}"
-                      class="delete_product font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</a>
-                  </td>
-                </tr>
-                @endforeach
-              </tbody>
-            </table>
-          </div>
+          {{-- Table --}}
+          {{ $dataTable->table() }}
 
         </div>
       </div>
+
     </div>
   </div>
 
+  <input type="hidden" id="current_user_id" value="{{ $current_user_id }}" />
+
+  {{-- Create Product Modal --}}
+  @include('pages.product.modal.create-product')
+
+  {{-- View Product Modal --}}
+  @include('pages.product.modal.view-product')
+
+  {{-- Edit Product Modal --}}
+  @include('pages.product.modal.edit-product')
+
+  {{-- Import Product Modal --}}
+  @include('pages.product.modal.import-product')
+
+  @push('scripts')
   <script type="text/javascript">
-    $(function () {
-      $('.delete_product').click(function (e) {
+    jQuery(document).ready(function ($) {
+
+      /*
+       * Helpers
+       */
+      function getUrlParameter(sParam) {
+        var sPageURL = window.location.search.substring(1),
+          sURLVariables = sPageURL.split("&"),
+          sParameterName,
+          i
+
+        for (i = 0; i < sURLVariables.length; i++) {
+          sParameterName = sURLVariables[i].split("=")
+
+          if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined
+              ? true
+              : decodeURIComponent(sParameterName[1])
+          }
+        }
+        return false
+      }
+
+      /*
+       * Show toast on status
+       */
+      let status = getUrlParameter('status');
+      //console.log('Status:', status);
+      if (status == 'product-created') {
+        Swal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: 'success',
+          text: 'Produk berhasil dibuat',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 3000,
+          iconColor: 'white',
+          customClass: {
+            popup: 'colored-toast'
+          },
+        }).then(function (e) {
+          //console.log(e);
+          window.history.replaceState({}, document.title, "/" + "product");
+        });
+      }
+      if (status == 'product-edited') {
+        Swal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: 'success',
+          text: 'Produk berhasil diubah',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 3000,
+          iconColor: 'white',
+          customClass: {
+            popup: 'colored-toast'
+          },
+        }).then(function (e) {
+          //console.log(e);
+          window.history.replaceState({}, document.title, "/" + "product");
+        });
+      }
+      if (status == 'product-deleted') {
+        Swal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: 'success',
+          text: 'Produk berhasil dihapus',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 3000,
+          iconColor: 'white',
+          customClass: {
+            popup: 'colored-toast'
+          },
+        }).then(function (e) {
+          //console.log(e);
+          window.history.replaceState({}, document.title, "/" + "product");
+        });
+      }
+      if (status == 'product-imported') {
+        Swal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: 'success',
+          text: 'Produk berhasil diimport',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 3000,
+          iconColor: 'white',
+          customClass: {
+            popup: 'colored-toast'
+          },
+        }).then(function (e) {
+          //console.log(e);
+          window.history.replaceState({}, document.title, "/" + "product");
+        });
+      }
+
+      /*
+       * Create Product
+       */
+      //$('#create-product').prop('checked', true);
+      $(document).on("click", "#btn-cancel-create-product", function(e) {
+        $('#create-product').prop('checked', false);
+      });
+      $(document).on("click", "#btn-submit-create-product", function(e) {
+        let name = $('#create_product_name').val();
+        let sku = $('#create_product_sku').val();
+        let brand = $('#create_product_brand').val();
+        let year = $('#create_product_year').val();
+        let cc = $('#create_product_cc').val();
+        let engine = $('#create_product_engine').val();
+        let price_buy = $('#create_product_price_buy').val();
+        let price_resell = $('#create_product_price_resell').val();
+        let price_retail = $('#create_product_price_retail').val();
+        let notes = $('#create_product_notes').val();
+        let user_id = $('#create_product_user_id').val();
+        let token   = $("meta[name='csrf-token']").attr("content");
+
+        $.ajax({
+          url: `/api/product`,
+          type: "POST",
+          cache: false,
+          data: {
+            "name": name,
+            "sku": sku,
+            "brand": brand,
+            "year": year,
+            "cc": cc,
+            "engine": engine,
+            "price_buy": price_buy,
+            "price_resell": price_resell,
+            "price_retail": price_retail,
+            "notes": notes,
+            "user_id": user_id,
+            "_token": token
+          },
+          success: function(response) {
+            $('#create-product').prop('checked', false);
+            $('#create_product_name').val('');
+            $('#create_product_sku').val('');
+            $('#create_product_brand').val('');
+            $('#create_product_cc').val('');
+            $('#create_product_engine').val('');
+            $('#create_product_price_buy').val('');
+            $('#create_product_price_resell').val('');
+            $('#create_product_price_retail').val('');
+            $('#create_product_notes').val('');
+            window.location.href = "{{url('/product?status=product-created')}}";
+          },
+          error: function(error) {
+            $('#create-product-error-message').show();
+            if(error.responseJSON.name) {
+              $('#create_product_name').addClass('input-error');
+            } else {
+              $('#create_product_name').removeClass('input-error');
+            }
+          }
+        });
+      });
+
+      /*
+       * View Product
+       */
+      $(document).on("click", "#table-products tbody tr td:not(:last-child):not(.dtr-control)", function(e) {
+        e.preventDefault();
+        let product_id = $(this).closest('tr').attr("id");
+        $("#view_product_id").val($(this).closest('tr').attr("id"));
+        $.ajax({
+          url: `api/product/${product_id}`,
+          type: "GET",
+          cache: false,
+          success:function(response){
+            //console.log(response);
+            //open modal
+            let product_id = response.data.id;
+            let product_name = response.data.name;
+            let product_sku = response.data.sku;
+            let product_brand = response.data.brand;
+            let product_year = response.data.year;
+            let product_cc = response.data.cc;
+            let product_engine = response.data.engine;
+            let price_buy = response.data.price_buy;
+            let price_resell = response.data.price_resell;
+            let price_retail = response.data.price_retail;
+            let notes = response.data.notes;
+            let user = response.data.user.name;
+
+            // view product
+            $('#view_product_id').val(product_id);
+            if (product_name) {
+              $('#view-product_name').show();
+              $('#view--data-product_name').text(product_name);
+            }
+            if (product_sku) {
+              $('#view-product_sku').show();
+              $('#view--data-product_sku').text(product_sku);
+            }
+            if (product_brand) {
+              $('#view-product_brand').show();
+              $('#view--data-product_brand').text(product_brand);
+            }
+            if (product_year) {
+              $('#view-product_year').show();
+              $('#view--data-product_year').text(product_year);
+            }
+            if (product_cc) {
+              $('#view-product_cc').show();
+              $('#view--data-product_cc').text(product_cc);
+            }
+            if (product_engine) {
+              $('#view-product_engine').show();
+              $('#view--data-product_engine').text(product_engine);
+            }
+            if (price_buy) {
+              $('#view-price_buy').show();
+              $('#view--data-price_buy').text(new Intl.NumberFormat('id-ID').format(price_buy));
+            }
+            if (price_resell) {
+              $('#view-price_resell').show();
+              $('#view--data-price_resell').text(new Intl.NumberFormat('id-ID').format(price_resell));
+            }
+            if (price_retail) {
+              $('#view-price_retail').show();
+              $('#view--data-price_retail').text(new Intl.NumberFormat('id-ID').format(price_retail));
+            }
+            if (notes) {
+              $('#view-product_notes').show();
+              $('#view--data-product_notes').text(notes);
+            }
+            $('#view-product').prop('checked', true);
+
+            // edit product
+            $('#edit_product_id').val(product_id);
+            $('#edit_product_name').val(product_name);
+            $('#edit_product_sku').val(product_sku);
+            $('#edit_product_brand').val(product_brand);
+            $('#edit_product_year').val(product_year);
+            $('#edit_product_cc').val(product_cc);
+            $('#edit_product_engine').val(product_engine);
+            $('#edit_product_price_buy').val(price_buy);
+            $('#edit_product_price_resell').val(price_resell);
+            $('#edit_product_price_retail').val(price_retail);
+            $('#edit_product_notes').val(notes);
+
+          }
+        });
+      });
+
+      /*
+       * Edit Product
+       */
+      //$('#edit-product').prop('checked', true);
+      $(document).on("click", "#btn-edit-product", function(e) {
+        $('#view-product').prop('checked', false);
+        $('#edit-product').prop('checked', true);
+      });
+      $(document).on("click", "#btn-cancel-edit-product", function(e) {
+        $('#edit-product').prop('checked', false);
+      });
+      $(document).on("click", "#btn-submit-edit-product", function(e) {
+        let product_id = $('#edit_product_id').val();
+        let name = $('#edit_product_name').val();
+        let sku = $('#edit_product_sku').val();
+        let brand = $('#edit_product_brand').val();
+        let year = $('#edit_product_year').val();
+        let cc = $('#edit_product_cc').val();
+        let engine = $('#edit_product_engine').val();
+        let price_buy = $('#edit_product_price_buy').val();
+        let price_resell = $('#edit_product_price_resell').val();
+        let price_retail = $('#edit_product_price_retail').val();
+        let notes = $('#edit_product_notes').val();
+        let token   = $("meta[name='csrf-token']").attr("content");
+        $.ajax({
+          url: `api/product/${product_id}`,
+          type: "PUT",
+          cache: false,
+          data: {
+            "name": name,
+            "sku": sku,
+            "brand": brand,
+            "year": year,
+            "cc": cc,
+            "engine": engine,
+            "price_buy": price_buy,
+            "price_resell": price_resell,
+            "price_retail": price_retail,
+            "notes": notes,
+            "_token": token
+          },
+          success: function(response) {
+            $('#edit-product').prop('checked', false);
+            $('#edit_product_name').val('');
+            $('#edit_product_sku').val('');
+            $('#edit_product_brand').val('');
+            $('#edit_product_cc').val('');
+            $('#edit_product_engine').val('');
+            $('#edit_product_price_buy').val('');
+            $('#edit_product_price_resell').val('');
+            $('#edit_product_price_retail').val('');
+            $('#edit_product_notes').val('');
+            window.location.href = "{{url('/product?status=product-edited')}}";
+          },
+          error: function(error) {
+            $('#edit-product-error-message').show();
+            if(error.responseJSON.name) {
+              $('#edit_product_name').addClass('input-error');
+            } else {
+              $('#edit_product_name').removeClass('input-error');
+            }
+          }
+        });
+      });
+
+      /*
+       * Delete Product
+       */
+      $(document).on("click", "#btn-delete-product", function(e) {
         e.preventDefault();
         //console.log('clicked');
-        const product_id = $(this).data("id");
+        const product_id = $('#view_product_id').val();
         Swal.fire({
           title: 'Are you sure?',
           text: 'You won\'t be able to revert this!',
@@ -106,4 +399,7 @@
       });
     });
   </script>
+
+  {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
+  @endpush
 </x-app-layout>

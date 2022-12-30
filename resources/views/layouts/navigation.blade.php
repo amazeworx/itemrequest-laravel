@@ -5,28 +5,33 @@
       <div class="flex">
         <!-- Logo -->
         <div class="shrink-0 flex items-center">
-          <a href="{{ route('dashboard') }}">
-            <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+          <a href="{{ route('item_request.index') }}">
+            <x-application-logo class="block h-8 w-auto text-primary" />
           </a>
         </div>
 
         <!-- Navigation Links -->
         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-          <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-            {{ __('Dashboard') }}
-          </x-nav-link>
+          @can('view requests')
           <x-nav-link :href="route('item_request.index')" :active="request()->routeIs('item_request.index')">
             {{ __('Item Request') }}
           </x-nav-link>
+          @endcan
+          @can('view products')
           <x-nav-link :href="route('product.index')" :active="request()->routeIs('product.index')">
             {{ __('Products') }}
           </x-nav-link>
+          @endcan
+          @can('view customers')
           <x-nav-link :href="route('customer.index')" :active="request()->routeIs('customer.index')">
             {{ __('Customers') }}
           </x-nav-link>
+          @endcan
+          @can('view users')
           <x-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
             {{ __('Users') }}
           </x-nav-link>
+          @endcan
         </div>
       </div>
 
@@ -36,8 +41,21 @@
           <x-navigation.dropdown align="right" width="48">
             <x-slot name="trigger">
               <button
-                class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                <div>{{ Auth::user()->name }}</div>
+                class="inline-flex items-start px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white focus:outline-none transition ease-in-out duration-150">
+                <div class="text-right">
+                  <div class="text-gray-700">{{ Auth::user()->name }}</div>
+                  <div class="text-[11px] leading-tight">
+                    @role('super-admin')
+                    Administrator
+                    @endrole
+                    @role('sales')
+                    Sales
+                    @endrole
+                    @role('purchasing')
+                    Purchasing
+                    @endrole
+                  </div>
+                </div>
 
                 <div class="ml-1">
                   <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">

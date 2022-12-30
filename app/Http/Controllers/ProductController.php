@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
+
+use App\DataTables\ProductsDataTable;
+//use Yajra\DataTables\Facades\DataTables;
+use DataTables;
 
 class ProductController extends Controller
 {
@@ -13,10 +18,11 @@ class ProductController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function index()
+  public function index(ProductsDataTable $dataTable)
   {
-    $data = Product::all();
-    return view('pages.product.index')->with('data', $data);
+    $user_id = Auth::id();
+    return $dataTable->with('user_id', $user_id)
+      ->render('pages.product.index');
   }
 
   /**

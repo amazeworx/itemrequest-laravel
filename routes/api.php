@@ -33,8 +33,5 @@ Route::get('search/product', [ProductController::class, 'search'])->name('api.se
 Route::get('search/customer', [CustomerController::class, 'search'])->name('api.search.customer');
 
 Route::post('import/item_request', [ItemRequestController::class, 'import'])->name('api.import.item_request');
-
-// Route::post('import/item_request', function () {
-//   Excel::import(new ItemRequestsImport, request()->file('file'));
-//   return redirect()->back()->with('success','Data Imported Successfully');
-// });
+Route::post('import/product', [ProductController::class, 'import'])->name('api.import.product');
+Route::post('import/customer', [CustomerController::class, 'import'])->name('api.import.customer');

@@ -16,13 +16,6 @@ class ItemRequestsImport implements ToModel, WithStartRow
     return 2;
   }
 
-  // public function getCsvSettings(): array
-  // {
-  //   return [
-  //     'delimiter' => ','
-  //   ];
-  // }
-
   /**
    * @param array $row
    *

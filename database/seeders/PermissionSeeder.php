@@ -28,6 +28,44 @@ class PermissionSeeder extends Seeder
     Permission::create(['name' => 'delete requests']);
     Permission::create(['name' => 'export requests']);
     Permission::create(['name' => 'import requests']);
+    Permission::create(['name' => 'edit own request']);
+    Permission::create(['name' => 'delete own request']);
+    Permission::create(['name' => 'create supplier requests']);
+    Permission::create(['name' => 'edit supplier requests']);
+
+    Permission::create(['name' => 'view products']);
+    Permission::create(['name' => 'create products']);
+    Permission::create(['name' => 'edit products']);
+    Permission::create(['name' => 'delete products']);
+    Permission::create(['name' => 'export products']);
+    Permission::create(['name' => 'import products']);
+    Permission::create(['name' => 'view product retail price']);
+    Permission::create(['name' => 'create product retail price']);
+    Permission::create(['name' => 'edit product retail price']);
+    Permission::create(['name' => 'view product resell price']);
+    Permission::create(['name' => 'create product resell price']);
+    Permission::create(['name' => 'edit product resell price']);
+    Permission::create(['name' => 'view product buy price']);
+    Permission::create(['name' => 'create product buy price']);
+    Permission::create(['name' => 'edit product buy price']);
+    Permission::create(['name' => 'edit own product']);
+    Permission::create(['name' => 'delete own product']);
+
+    Permission::create(['name' => 'view customers']);
+    Permission::create(['name' => 'create customers']);
+    Permission::create(['name' => 'edit customers']);
+    Permission::create(['name' => 'delete customers']);
+    Permission::create(['name' => 'export customers']);
+    Permission::create(['name' => 'import customers']);
+    Permission::create(['name' => 'edit own customer']);
+    Permission::create(['name' => 'delete own customer']);
+
+    Permission::create(['name' => 'view users']);
+    Permission::create(['name' => 'create users']);
+    Permission::create(['name' => 'edit users']);
+    Permission::create(['name' => 'delete users']);
+    Permission::create(['name' => 'export users']);
+    Permission::create(['name' => 'import users']);
 
     $superadminRole = Role::create(['name' => 'super-admin']);
     // gets all permissions via Gate::before rule
@@ -37,15 +75,34 @@ class PermissionSeeder extends Seeder
     $salesRole->givePermissionTo('view requests');
     $salesRole->givePermissionTo('update status requests');
     $salesRole->givePermissionTo('create requests');
-    $salesRole->givePermissionTo('edit requests');
-    $salesRole->givePermissionTo('delete requests');
+    $salesRole->givePermissionTo('edit own request');
+    $salesRole->givePermissionTo('view products');
+    $salesRole->givePermissionTo('create products');
+    $salesRole->givePermissionTo('edit products');
+    $salesRole->givePermissionTo('view customers');
+    $salesRole->givePermissionTo('create customers');
+    $salesRole->givePermissionTo('edit customers');
 
     $purchasingRole = Role::create(['name' => 'purchasing']);
     $purchasingRole->givePermissionTo('view requests');
     $purchasingRole->givePermissionTo('update status requests');
-    //$purchasingRole->givePermissionTo('create requests');
-    //$purchasingRole->givePermissionTo('edit requests');
-    //$purchasingRole->givePermissionTo('delete requests');
+    $purchasingRole->givePermissionTo('create supplier requests');
+    $purchasingRole->givePermissionTo('edit supplier requests');
+    $purchasingRole->givePermissionTo('view products');
+    $purchasingRole->givePermissionTo('create products');
+    $purchasingRole->givePermissionTo('edit products');
+    $purchasingRole->givePermissionTo('view product retail price');
+    $purchasingRole->givePermissionTo('create product retail price');
+    $purchasingRole->givePermissionTo('edit product retail price');
+    $purchasingRole->givePermissionTo('view product resell price');
+    $purchasingRole->givePermissionTo('create product resell price');
+    $purchasingRole->givePermissionTo('edit product resell price');
+    $purchasingRole->givePermissionTo('view product buy price');
+    $purchasingRole->givePermissionTo('create product buy price');
+    $purchasingRole->givePermissionTo('edit product buy price');
+    $purchasingRole->givePermissionTo('view customers');
+    $purchasingRole->givePermissionTo('create customers');
+    $purchasingRole->givePermissionTo('edit customers');
 
     // create demo users
     $user = User::factory()->create([

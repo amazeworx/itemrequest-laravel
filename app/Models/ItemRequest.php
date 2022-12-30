@@ -14,21 +14,26 @@ class ItemRequest extends Model
 
   public function customer()
   {
-    return $this->belongsTo(Customer::class, 'customer_id');
+    return $this->belongsTo(Customer::class, 'customer_id')->withTrashed();
   }
 
   public function product()
   {
-    return $this->belongsTo(Product::class, 'product_id');
+    return $this->belongsTo(Product::class, 'product_id')->withTrashed();
   }
 
   public function salesman()
   {
-    return $this->belongsTo(User::class, 'salesman_id');
+    return $this->belongsTo(User::class, 'salesman_id')->withTrashed();
   }
 
   public function status()
   {
     return $this->belongsTo(StatusRequest::class, 'status_id');
+  }
+
+  public function user()
+  {
+    return $this->belongsTo(User::class, 'user_id')->withTrashed();
   }
 }

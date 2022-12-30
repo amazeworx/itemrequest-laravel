@@ -19,12 +19,12 @@ return new class extends Migration
       $table->string('username')->unique();
       $table->string('email')->unique();
       $table->string('whatsapp')->nullable();
-      $table->string('role')->nullable();
       $table->timestamp('email_verified_at')->nullable();
       $table->string('password');
       $table->boolean('active')->nullable();
       $table->rememberToken();
       $table->timestamps();
+      $table->softDeletes();
     });
   }
 

@@ -792,6 +792,6 @@ $current_user_id = auth()->user()->id;
     });
   </script>
 
-  {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
+  {{ $dataTable->scripts(attributes: ['type' => 'text/javascript']) }}
   @endpush
 </x-app-layout>

@@ -233,7 +233,7 @@ div.dataTables_wrapper {
     label {
       @apply flex items-center text-sm gap-x-2;
     }
-    .form-control {
+    input {
       @apply focus:border-indigo-500 focus:ring-indigo-500 rounded-md ml-0 text-sm leading-6 border border-gray-300 py-2 px-4;
     }
   }
@@ -241,7 +241,7 @@ div.dataTables_wrapper {
     @apply text-sm pt-2;
   }
   div.dataTables_paginate {
-    @apply flex justify-end pt-2;
+    @apply flex justify-end pt-2 float-none text-right text-xs;
     ul.pagination {
       @apply m-0 flex text-sm;
       .page-link {
@@ -257,25 +257,48 @@ div.dataTables_wrapper {
           @apply rounded-r-md;
         }
       }
-      .paginate_button {
-        &.active {
-          .page-link {
-            @apply bg-primary text-white border-primary;
-          }
+    }
+    > span {
+      @apply block;
+    }
+    .paginate_button {
+      /* box-sizing: border-box;
+      display: inline-block;
+      min-width: 1.5em;
+      padding: 0.5em 1em;
+      margin-left: 2px;
+      text-align: center;
+      text-decoration: none !important;
+      cursor: pointer;
+      color: inherit !important;
+      border: 1px solid transparent;
+      border-radius: 2px; */
+      /* @apply rounded border-transparent ml-0 inline-flex items-center justify-center w-6 h-6 p-2 cursor-pointer box-border text-center no-underline; */
+      @apply h-8 min-w-[32px] font-medium inline-flex items-center justify-center rounded hover:border-transparent hover:bg-none hover:bg-gray-100 hover:!text-base-content active:shadow-none active:border-gray-300;
+      &.current,
+      &.current:hover {
+        @apply bg-none bg-gray-100 border-gray-300;
+      }
+      &.active {
+        .page-link {
+          @apply bg-primary text-white border-primary;
         }
-        &.disabled {
-          .page-link {
-            @apply text-gray-400 hover:text-gray-400 hover:bg-base-200 cursor-not-allowed;
-          }
+      }
+      &.disabled,
+      &.disabled:hover,
+      &.disabled:active {
+        @apply !text-gray-400;
+        .page-link {
+          @apply text-gray-400 hover:text-gray-400 hover:bg-base-200 cursor-not-allowed;
         }
       }
     }
   }
   div.dt-buttons {
     @apply text-right flex items-center space-x-3;
-    .btn {
+    .dt-button {
       &.btn-primary {
-        @apply min-h-[42px] h-[42px] px-4 inline-flex gap-x-2 text-xs normal-case rounded-md bg-gray-100 border-gray-300 text-gray-500 hover:bg-gray-100 hover:shadow-md transition duration-200;
+        @apply min-h-[42px] h-[42px] px-4 inline-flex items-center gap-x-2 text-xs normal-case rounded-md bg-gray-100 border border-gray-300 font-medium text-gray-500 hover:bg-gray-100 hover:shadow-md transition duration-200;
         > span {
           @apply inline-flex items-center gap-x-1;
         }

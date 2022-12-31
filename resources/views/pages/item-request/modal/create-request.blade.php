@@ -22,7 +22,7 @@
             <input type="hidden" id="create_status_id" value="1" />
 
             <div>
-              <x-forms.input-label for="create_product_id" :value="__('Tanggal')" />
+              <x-forms.input-label for="create_request_date" :value="__('Tanggal')" />
               <x-flat-pickr id="create_request_date" name="create_request_date" value="{{ date('d-m-Y') }}"
                 format="dd-mm-yyyy"
                 :options="['enableTime' => 'false', 'dateFormat' => 'd-m-Y', 'altFormat' => 'd-m-Y', 'time_24hr' => 'true']" />

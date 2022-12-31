@@ -74,7 +74,8 @@ class ItemRequestsDataTable extends DataTable
     return $this->builder()
       ->setTableId('table-item-request')
       ->addTableClass('responsive dt-responsive')
-      ->responsive(["details" => ["type" => 'column', "target" => -1]])
+      ->removeTableClass('table-striped table-bordered table-hover')
+      //->responsive(["details" => ["type" => 'column', "target" => -1]])
       ->columns($this->getColumns())
       ->minifiedAjax()
       ->orderBy(0)
@@ -83,7 +84,12 @@ class ItemRequestsDataTable extends DataTable
       ->buttons($this->getButtons())
       ->lengthMenu([[10, 25, 50, 100, 250, 500, 1000, -1], [10, 25, 50, 100, 250, 500, 1000, "All"]])
       ->pageLength(50)
-      ->language(["search" => '<span>Search</span>', "searchPlaceholder" => 'Search records']);
+      ->language(["search" => '<span>Search</span>', "searchPlaceholder" => 'Search records'])
+      ->parameters(
+        [
+          "responsive" => ["details" => ["type" => 'column', "target" => -1]]
+        ]
+      );
   }
 
   public function getButtons(): array

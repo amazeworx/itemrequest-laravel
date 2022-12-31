@@ -7,7 +7,9 @@
 
 @import "flatpickr/dist/flatpickr.min.css";
 @import "selectize.css";
-@import "datatables.css";
+/* @import "datatables.css"; */
+@import "./datatables/jquery.dataTables.css";
+@import "./datatables/responsive.dataTables.css";
 /* Variables */
 /* @import "variables"; */
 
@@ -191,6 +193,9 @@
         @apply bg-slate-50;
       }
     }
+    &.no-footer {
+      @apply border-b border-base-300;
+    }
   }
 }
 
@@ -229,7 +234,7 @@ div.dataTables_wrapper {
       @apply flex items-center text-sm gap-x-2;
     }
     .form-control {
-      @apply border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md ml-0 text-sm leading-6;
+      @apply focus:border-indigo-500 focus:ring-indigo-500 rounded-md ml-0 text-sm leading-6 border border-gray-300 py-2 px-4;
     }
   }
   div.dataTables_info {

@@ -5,20 +5,25 @@ $current_user_id = auth()->user()->id;
 <x-app-layout>
   <x-slot name="header">
     <div class="flex justify-between">
-      <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+      <h2 class="font-semibold text-xl text-gray-800 leading-tight">
         {{ __('Users') }}
       </h2>
       @can('create users')
-      <label for="create-user" class="btn btn-primary">{{ __('Add User') }}</label>
+      <label for="create-user" class="btn btn-primary hidden md:inline-flex">{{ __('Add User')
+        }}</label>
+      <div class="fixed right-4 bottom-4 z-30 md:hidden">
+        <label for="create-user"
+          class="btn btn-circle btn-primary btn-lg font-normal font-mono !text-3xl leading-none shadow-md">+</label>
+      </div>
       @endcan
     </div>
   </x-slot>
 
-  <div class="py-12">
+  <div class="pt-0 lg:pb-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-      <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-        <div class="text-gray-900 dark:text-gray-100 p-6">
+      <div class="bg-white shadow sm:rounded-lg">
+        <div class="text-gray-900 px-4 py-4 sm:p-6">
 
           {{-- Table --}}
           {{ $dataTable->table() }}

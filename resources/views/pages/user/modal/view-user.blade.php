@@ -1,9 +1,9 @@
 <div class="view-user-modal">
   <input type="checkbox" id="view-user" class="modal-toggle" />
-  <div class="modal z-40">
+  <div class="modal modal-bottom md:modal-middle z-40">
     <div class="modal-box p-0 relative">
       <label for="view-user" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-      <div class="p-6">
+      <div class="p-4 sm:p-6">
 
         <div class="flex gap-x-4 items-baseline mb-4">
           <h3 class="text-xl font-medium text-gray-900">{{ __('User Detail') }}</h3>
@@ -13,43 +13,55 @@
 
         <div>
           <div class="flex gap-x-4 py-2 border-b">
-            <div class="w-1/3 font-medium text-sm leading-6 text-slate-500 uppercase">Nama</div>
-            <div id="view--data-name" class="w-2/3"></div>
+            <div
+              class="w-1/3 font-medium text-xs md:text-sm leading-5 md:leading-6 whitespace-nowrap text-slate-500 uppercase">
+              Nama</div>
+            <div id="view--data-name" class="w-2/3 text-sm md:text-base"></div>
           </div>
         </div>
 
         <div>
           <div class="flex gap-x-4 py-2 border-b">
-            <div class="w-1/3 font-medium text-sm leading-6 text-slate-500 uppercase">Email</div>
-            <div id="view--data-email" class="w-2/3"></div>
+            <div
+              class="w-1/3 font-medium text-xs md:text-sm leading-5 md:leading-6 whitespace-nowrap text-slate-500 uppercase">
+              Email</div>
+            <div id="view--data-email" class="w-2/3 text-sm md:text-base"></div>
           </div>
         </div>
 
         <div>
           <div class="flex gap-x-4 py-2 border-b">
-            <div class="w-1/3 font-medium text-sm leading-6 text-slate-500 uppercase">Username</div>
-            <div id="view--data-username" class="w-2/3"></div>
+            <div
+              class="w-1/3 font-medium text-xs md:text-sm leading-5 md:leading-6 whitespace-nowrap text-slate-500 uppercase">
+              Username</div>
+            <div id="view--data-username" class="w-2/3 text-sm md:text-base"></div>
           </div>
         </div>
 
         <div>
           <div class="flex gap-x-4 py-2 border-b">
-            <div class="w-1/3 font-medium text-sm leading-6 text-slate-500 uppercase">WhatsApp</div>
-            <div id="view--data-whatsapp" class="w-2/3"></div>
+            <div
+              class="w-1/3 font-medium text-xs md:text-sm leading-5 md:leading-6 whitespace-nowrap text-slate-500 uppercase">
+              WhatsApp</div>
+            <div id="view--data-whatsapp" class="w-2/3 text-sm md:text-base"></div>
           </div>
         </div>
 
         <div>
           <div class="flex gap-x-4 py-2 border-b">
-            <div class="w-1/3 font-medium text-sm leading-6 text-slate-500 uppercase">Role</div>
-            <div id="view--data-role" class="w-2/3 capitalize"></div>
+            <div
+              class="w-1/3 font-medium text-xs md:text-sm leading-5 md:leading-6 whitespace-nowrap text-slate-500 uppercase">
+              Role</div>
+            <div id="view--data-role" class="w-2/3 text-sm md:text-base capitalize"></div>
           </div>
         </div>
 
         <div>
           <div class="flex gap-x-4 py-2 border-b">
-            <div class="w-1/3 font-medium text-sm leading-6 text-slate-500 uppercase">Status</div>
-            <div id="view--data-status" class="w-2/3"></div>
+            <div
+              class="w-1/3 font-medium text-xs md:text-sm leading-5 md:leading-6 whitespace-nowrap text-slate-500 uppercase">
+              Status</div>
+            <div id="view--data-status" class="w-2/3 text-sm md:text-base"></div>
           </div>
         </div>
 

@@ -2,11 +2,11 @@
   <x-auth-card>
     <x-slot name="logo">
       <a href="/">
-        <x-application-logo class="w-20 h-20 text-primary" />
+        <x-application-logo class="w-14 h-14 text-primary sm:w-20 sm:h-20" />
       </a>
     </x-slot>
 
-    <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
+    <div class="mb-4 text-sm text-gray-600">
       {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
     </div>
 
@@ -23,10 +23,10 @@
         <x-input-error :messages="$errors->get('password')" class="mt-2" />
       </div>
 
-      <div class="flex justify-end mt-4">
-        <x-buttons.button-primary>
+      <div class="flex mt-4">
+        <button class="btn btn-primary w-full">
           {{ __('Confirm') }}
-        </x-buttons.button-primary>
+        </button>
       </div>
     </form>
   </x-auth-card>

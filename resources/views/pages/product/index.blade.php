@@ -8,17 +8,22 @@ $current_user_id = auth()->user()->id;
       <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
         {{ __('Products') }}
       </h2>
-      @can('create requests')
-      <label for="create-product" class="btn btn-primary">{{ __('Add Product') }}</label>
+      @can('create products')
+      <label for="create-product" class="btn btn-primary hidden md:inline-flex">{{ __('Add Product')
+        }}</label>
+      <div class="fixed right-4 bottom-4 z-30 md:hidden">
+        <label for="create-product"
+          class="btn btn-circle btn-primary btn-lg font-normal font-mono !text-3xl leading-none shadow-md">+</label>
+      </div>
       @endcan
     </div>
   </x-slot>
 
-  <div class="py-12">
+  <div class="pt-0 lg:pb-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-      <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-        <div class="text-gray-900 dark:text-gray-100 p-6">
+      <div class="bg-white shadow sm:rounded-lg">
+        <div class="text-gray-900 px-4 py-4 sm:p-6">
 
           {{-- Table --}}
           {{ $dataTable->table() }}
@@ -145,69 +150,6 @@ $current_user_id = auth()->user()->id;
           window.history.replaceState({}, document.title, "/" + "product");
         });
       }
-
-      /*
-       * Create Product
-       */
-      //$('#create-product').prop('checked', true);
-      $(document).on("click", "#btn-cancel-create-product", function(e) {
-        $('#create-product').prop('checked', false);
-      });
-      $(document).on("click", "#btn-submit-create-product", function(e) {
-        let name = $('#create_product_name').val();
-        let sku = $('#create_product_sku').val();
-        let brand = $('#create_product_brand').val();
-        let year = $('#create_product_year').val();
-        let cc = $('#create_product_cc').val();
-        let engine = $('#create_product_engine').val();
-        let price_buy = $('#create_product_price_buy').val();
-        let price_resell = $('#create_product_price_resell').val();
-        let price_retail = $('#create_product_price_retail').val();
-        let notes = $('#create_product_notes').val();
-        let user_id = $('#create_product_user_id').val();
-        let token   = $("meta[name='csrf-token']").attr("content");
-
-        $.ajax({
-          url: `/api/product`,
-          type: "POST",
-          cache: false,
-          data: {
-            "name": name,
-            "sku": sku,
-            "brand": brand,
-            "year": year,
-            "cc": cc,
-            "engine": engine,
-            "price_buy": price_buy,
-            "price_resell": price_resell,
-            "price_retail": price_retail,
-            "notes": notes,
-            "user_id": user_id,
-            "_token": token
-          },
-          success: function(response) {
-            $('#create-product').prop('checked', false);
-            $('#create_product_name').val('');
-            $('#create_product_sku').val('');
-            $('#create_product_brand').val('');
-            $('#create_product_cc').val('');
-            $('#create_product_engine').val('');
-            $('#create_product_price_buy').val('');
-            $('#create_product_price_resell').val('');
-            $('#create_product_price_retail').val('');
-            $('#create_product_notes').val('');
-            window.location.href = "{{url('/product?status=product-created')}}";
-          },
-          error: function(error) {
-            $('#create-product-error-message').show();
-            if(error.responseJSON.name) {
-              $('#create_product_name').addClass('input-error');
-            } else {
-              $('#create_product_name').removeClass('input-error');
-            }
-          }
-        });
-      });
 
       /*
        * View Product
@@ -352,11 +294,13 @@ $current_user_id = auth()->user()->id;
             window.location.href = "{{url('/product?status=product-edited')}}";
           },
           error: function(error) {
-            $('#edit-product-error-message').show();
+            //$('#edit-product-error-message').show();
             if(error.responseJSON.name) {
               $('#edit_product_name').addClass('input-error');
+              $('#error_edit_product_name').text(error.responseJSON.name).show();
             } else {
               $('#edit_product_name').removeClass('input-error');
+              $('#error_edit_product_name').hide();
             }
           }
         });

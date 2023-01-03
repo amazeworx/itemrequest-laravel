@@ -79,11 +79,11 @@ class ItemRequestsDataTable extends DataTable
       ->minifiedAjax()
       ->orderBy(0)
       ->selectStyleSingle()
-      ->dom("<'flex justify-end'fB><tr><'flex justify-between'lp>")
+      ->dom("<'dt-top'fB><'table-container'tr><'dt-bottom'lp>")
       ->buttons($this->getButtons())
       ->lengthMenu([[10, 25, 50, 100, 250, 500, 1000, -1], [10, 25, 50, 100, 250, 500, 1000, "All"]])
       ->pageLength(10)
-      ->language(["search" => '<span>Search</span>', "searchPlaceholder" => 'Search records'])
+      ->language(["search" => '<span class="hidden md:block">Search</span>', "searchPlaceholder" => 'Search records'])
       ->parameters(
         [
           "responsive" => ["details" => ["type" => 'column', "target" => -1]]
@@ -148,42 +148,42 @@ class ItemRequestsDataTable extends DataTable
     return [
       Column::make('request_code')
         ->title('Request #')
-        ->responsivePriority(1),
+        ->responsivePriority(5),
       Column::computed('request_date')
         ->title('Date')
-        ->responsivePriority(2)
+        ->responsivePriority(4)
         ->orderable(true),
       Column::make('product.name')
-        ->responsivePriority(3)
+        ->responsivePriority(1)
         ->title('Product'),
       Column::make('customer.name')
-        ->responsivePriority(4)
+        ->responsivePriority(3)
         ->title('Customer'),
       Column::make('salesman.name')
         ->responsivePriority(5)
         ->title('Sales'),
       Column::make('status.name')
-        ->responsivePriority(3)
+        ->responsivePriority(2)
         ->title('Status'),
       Column::make('product.brand')
         ->title('Merk Mobil')
         ->content('-')
-        ->responsivePriority(7)
+        ->responsivePriority(6)
         ->addClass('none'),
       Column::make('product.year')
         ->title('Tahun')
         ->content('-')
-        ->responsivePriority(8)
+        ->responsivePriority(7)
         ->addClass('none'),
       Column::make('product.cc')
         ->title('CC')
         ->content('-')
-        ->responsivePriority(9)
+        ->responsivePriority(8)
         ->addClass('none'),
       Column::make('product.engine')
         ->title('Tipe Mesin')
         ->content('-')
-        ->responsivePriority(10)
+        ->responsivePriority(9)
         ->addClass('none'),
       Column::make('user.name')
         ->title('Created By')

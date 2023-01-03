@@ -1,4 +1,4 @@
-<div class="edit-modal">
+<div class="edit-request-modal">
   <input type="checkbox" id="edit-item-request" class="modal-toggle" />
   <div class="modal z-40">
     <div class="modal-box p-0 relative">

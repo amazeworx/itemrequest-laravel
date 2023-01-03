@@ -1,8 +1,9 @@
 <div class="create-product-modal">
   <input type="checkbox" id="create-product" class="modal-toggle" />
-  <div class="modal z-40">
-    <div class="modal-box p-0 relative max-w-2xl">
-      <div class="p-6">
+  <div class="modal modal-bottom md:modal-middle z-40">
+    <div class="modal-box p-0 relative !max-w-2xl">
+      <label for="create-product" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+      <div class="p-4 sm:p-6">
         <h3 class="mb-4 text-xl font-medium text-gray-900">{{ __('Add New Product') }}</h3>
         <div class="mt-6 space-y-4">
 
@@ -15,18 +16,19 @@
 
           <input type="hidden" id="create_product_user_id" value="{{ $current_user_id }}" />
 
-          <div class="flex gap-x-4">
-            <div class="w-2/3">
+          <div class="flex flex-wrap gap-4 md:flex-nowrap">
+            <div class="w-full md:w-2/3">
               <x-input-label for="create_product_name" :value="__('Nama Barang')" />
               <x-text-input id="create_product_name" type="text" class="mt-1 block w-full" />
+              <x-forms.input-error id="error_create_product_name"></x-forms.input-error>
             </div>
-            <div class="w-1/3">
+            <div class="w-full md:w-1/3">
               <x-input-label for="create_product_sku" :value="__('Kode Barang / SKU')" />
               <x-text-input id="create_product_sku" type="text" class="mt-1 block w-full" />
             </div>
           </div>
 
-          <div class="flex gap-x-4">
+          <div class="grid grid-cols-2 gap-x-4 gap-y-4 md:grid-cols-4">
             <div>
               <x-input-label for="create_product_brand" :value="__('Merek Mobil')" />
               <x-text-input id="create_product_brand" type="text" class="mt-1 block w-full" />
@@ -45,21 +47,25 @@
             </div>
           </div>
 
-          <div class="flex gap-x-4" style="display: none">
-            <div class="w-1/3">
+          <div class="flex flex-wrap gap-4 md:flex-nowrap md:gap-x-4">
+            @can('create product buy price')
+            <div class="w-full">
               <x-input-label for="create_product_price_buy" :value="__('Harga Beli')" />
               <x-text-input id="create_product_price_buy" type="number" class="mt-1 block w-full" />
             </div>
-
-            <div class="w-1/3">
-              <x-input-label for="create_product_price_resell" :value="__('Harga Toko')" />
-              <x-text-input id="create_product_price_resell" type="number" />
+            @endcan
+            @can('create product resell price')
+            <div class="w-full md:w-1/2">
+              <x-input-label for="create_product_price_resell" :value="__('Harga Jual Toko')" />
+              <x-text-input id="create_product_price_resell" type="number" class="mt-1 block w-full" />
             </div>
-
-            <div class="w-1/3">
-              <x-input-label for="create_product_price_retail" :value="__('Harga User')" />
+            @endcan
+            @can('create product retail price')
+            <div class="w-full md:w-1/2">
+              <x-input-label for="create_product_price_retail" :value="__('Harga Jual User')" />
               <x-text-input id="create_product_price_retail" type="number" class="mt-1 block w-full" />
             </div>
+            @endcan
           </div>
 
           <div>

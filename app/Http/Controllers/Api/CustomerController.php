@@ -59,9 +59,19 @@ class CustomerController extends Controller
   public function store(Request $request)
   {
     //define validation rules
-    $validator = Validator::make($request->all(), [
+    $rules = [
       'name' => 'required',
-    ]);
+      'phone' => 'required',
+      'current_salesman_id' => 'required',
+      'previous_salesman' => 'required_if:existing,==,1'
+    ];
+    $messages = [
+      'name.required' => 'Nama wajib diisi',
+      'phone.required' => 'Phone wajib diisi',
+      'current_salesman_id.required' => 'Sales sekarang wajib diisi',
+      'previous_salesman.required_if' => 'Sales sebelumnya wajib diisi'
+    ];
+    $validator = Validator::make($request->all(), $rules, $messages);
 
     //check if validation fails
     if ($validator->fails()) {
@@ -139,9 +149,19 @@ class CustomerController extends Controller
   public function update(Request $request, Customer $customer)
   {
 
-    $validator = Validator::make($request->all(), [
+    $rules = [
       'name' => 'required',
-    ]);
+      'phone' => 'required',
+      'current_salesman_id' => 'required',
+      'previous_salesman' => 'required_if:existing,==,1'
+    ];
+    $messages = [
+      'name.required' => 'Nama wajib diisi',
+      'phone.required' => 'Phone wajib diisi',
+      'current_salesman_id.required' => 'Sales sekarang wajib diisi',
+      'previous_salesman.required_if' => 'Sales sebelumnya wajib diisi'
+    ];
+    $validator = Validator::make($request->all(), $rules, $messages);
 
     //check if validation fails
     if ($validator->fails()) {

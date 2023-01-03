@@ -49,10 +49,15 @@ class ProductController extends Controller
    */
   public function store(Request $request)
   {
-    //define validation rules
-    $validator = Validator::make($request->all(), [
+    $rules = [
       'name' => 'required',
-    ]);
+    ];
+    $messages = [
+      'name.required' => 'Nama Barang wajib diisi',
+    ];
+
+    //define validation rules
+    $validator = Validator::make($request->all(), $rules, $messages);
 
     //check if validation fails
     if ($validator->fails()) {
@@ -62,7 +67,6 @@ class ProductController extends Controller
     //create product
     $product = Product::create([
       'name' => $request->name,
-      'description' => $request->description,
       'sku' => $request->sku,
       'brand' => $request->brand,
       'year' => $request->year,

@@ -1,9 +1,9 @@
 <div class="view-customer-modal">
   <input type="checkbox" id="view-customer" class="modal-toggle" />
-  <div class="modal z-40">
+  <div class="modal modal-bottom md:modal-middle z-40">
     <div class="modal-box p-0 relative">
       <label for="view-customer" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-      <div class="p-6">
+      <div class="p-4 sm:p-6">
 
         <div class="flex gap-x-4 items-baseline mb-4">
           <h3 class="text-xl font-medium text-gray-900">{{ __('Customer Detail') }}</h3>
@@ -14,57 +14,80 @@
         <div>
           <div id="view-name" style="display: none">
             <div class="flex gap-x-4 py-2 border-b">
-              <div class="w-1/3 font-medium text-sm leading-6 text-slate-500 uppercase">Nama Customer</div>
-              <div id="view--data-name" class="w-2/3"></div>
+              <div
+                class="w-2/5 md:w-1/3 font-medium text-xs md:text-sm leading-5 md:leading-6 whitespace-nowrap text-slate-500 uppercase">
+                Nama
+                Customer</div>
+              <div id="view--data-name" class="w-3/5 md:w-2/3 text-sm md:text-base"></div>
             </div>
           </div>
 
           <div id="view-phone" style="display: none">
             <div class="flex gap-x-4 py-2 border-b">
-              <div class="w-1/3 font-medium text-sm leading-6 text-slate-500 uppercase">Phone</div>
-              <div id="view--data-phone" class="w-2/3"></div>
+              <div
+                class="w-2/5 md:w-1/3 font-medium text-xs md:text-sm leading-5 md:leading-6 whitespace-nowrap text-slate-500 uppercase">
+                Phone
+              </div>
+              <div id="view--data-phone" class="w-3/5 md:w-2/3 text-sm md:text-base"></div>
             </div>
           </div>
 
           <div id="view-customer_type" style="display: none">
             <div class="flex gap-x-4 py-2 border-b">
-              <div class="w-1/3 font-medium text-sm leading-6 text-slate-500 uppercase">Tipe</div>
-              <div id="view--data-customer_type" class="w-2/3"></div>
+              <div
+                class="w-2/5 md:w-1/3 font-medium text-xs md:text-sm leading-5 md:leading-6 whitespace-nowrap text-slate-500 uppercase">
+                Tipe
+              </div>
+              <div id="view--data-customer_type" class="w-3/5 md:w-2/3 text-sm md:text-base"></div>
             </div>
           </div>
 
           <div id="view-current_salesman" style="display: none">
             <div class="flex gap-x-4 py-2 border-b">
-              <div class="w-1/3 font-medium text-sm leading-6 text-slate-500 uppercase">Sales Sekarang</div>
-              <div id="view--data-current_salesman" class="w-2/3"></div>
+              <div
+                class="w-2/5 md:w-1/3 font-medium text-xs md:text-sm leading-5 md:leading-6 whitespace-nowrap text-slate-500 uppercase">
+                Sales
+                Sekarang</div>
+              <div id="view--data-current_salesman" class="w-3/5 md:w-2/3 text-sm md:text-base"></div>
             </div>
           </div>
 
           <div id="view-previous_salesman" style="display: none">
             <div class="flex gap-x-4 py-2 border-b">
-              <div class="w-1/3 font-medium text-sm leading-6 text-slate-500 uppercase">Sales Sebelumnya</div>
-              <div id="view--data-previous_salesman" class="w-2/3"></div>
+              <div
+                class="w-2/5 md:w-1/3 font-medium text-xs md:text-sm leading-5 md:leading-6 whitespace-nowrap text-slate-500 uppercase">
+                Sales
+                Sebelumnya</div>
+              <div id="view--data-previous_salesman" class="w-3/5 md:w-2/3 text-sm md:text-base"></div>
             </div>
           </div>
 
           <div id="view-existing" style="display: none">
             <div class="flex gap-x-4 py-2 border-b">
-              <div class="w-1/3 font-medium text-sm leading-6 text-slate-500 uppercase">Langganan</div>
-              <div id="view--data-existing" class="w-2/3"></div>
+              <div
+                class="w-2/5 md:w-1/3 font-medium text-xs md:text-sm leading-5 md:leading-6 whitespace-nowrap text-slate-500 uppercase">
+                Langganan</div>
+              <div id="view--data-existing" class="w-3/5 md:w-2/3 text-sm md:text-base"></div>
             </div>
           </div>
 
           <div id="view-notes" style="display: none">
             <div class="flex gap-x-4 py-2 border-b">
-              <div class="w-1/3 font-medium text-sm leading-6 text-slate-500 uppercase">Catatan</div>
-              <div id="view--data-notes" class="w-2/3"></div>
+              <div
+                class="w-2/5 md:w-1/3 font-medium text-xs md:text-sm leading-5 md:leading-6 whitespace-nowrap text-slate-500 uppercase">
+                Catatan
+              </div>
+              <div id="view--data-notes" class="w-3/5 md:w-2/3 text-sm md:text-base"></div>
             </div>
           </div>
 
           <div id="view-user" style="display: none">
             <div class="flex gap-x-4 py-2 border-b">
-              <div class="w-1/3 font-medium text-sm leading-6 text-slate-500 uppercase">Created by</div>
-              <div id="view--data-user" class="w-2/3"></div>
+              <div
+                class="w-2/5 md:w-1/3 font-medium text-xs md:text-sm leading-5 md:leading-6 whitespace-nowrap text-slate-500 uppercase">
+                Created
+                by</div>
+              <div id="view--data-user" class="w-3/5 md:w-2/3 text-sm md:text-base"></div>
             </div>
           </div>
 

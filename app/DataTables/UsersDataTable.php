@@ -57,7 +57,7 @@ class UsersDataTable extends DataTable
       ->minifiedAjax()
       ->orderBy(0)
       ->selectStyleSingle()
-      ->dom("<'flex justify-end'fB><tr><'flex justify-between'lp>")
+      ->dom("<'dt-top'fB><'table-container'tr><'dt-bottom'lp>")
       ->buttons($this->getButtons())
       ->lengthMenu([[10, 25, 50, 100, 250, 500, 1000, -1], [10, 25, 50, 100, 250, 500, 1000, "All"]])
       ->pageLength(50)
@@ -86,12 +86,13 @@ class UsersDataTable extends DataTable
         ->responsivePriority(3),
       Column::make('roles.0.name')
         ->title('Role')
-        ->responsivePriority(3),
+        ->addClass('capitalize')
+        ->responsivePriority(4),
       Column::make('active')
         ->title('Status')
         ->content('-')
         //->addClass('none')
-        ->responsivePriority(6)
+        ->responsivePriority(5)
         ->renderRaw("
           function ( data ) {
             return data == 0 ? 'Inactive' : 'Active';

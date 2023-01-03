@@ -8,6 +8,7 @@ module.exports = {
     "./storage/framework/views/*.php",
     "./resources/views/**/*.blade.php",
     "./resources/views/**/*.js",
+    "./app/DataTables/*.php",
     "./vendor/rawilk/laravel-form-components/src/**/*.php",
     "./vendor/rawilk/laravel-form-components/resources/**/*.php",
     "./vendor/rawilk/laravel-form-components/resources/js/*.js",
@@ -43,6 +44,12 @@ module.exports = {
     "z-40",
     "inline-flex",
     "gap-x-2",
+    "flex-col",
+    "flex-row",
+    "sm:flex-row",
+    "md:justify-end",
+    "md:block",
+    "capitalize",
   ],
   theme: {
     extend: {

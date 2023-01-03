@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
+<nav x-data="{ open: false }" class="bg-white shadow">
   <!-- Primary Navigation Menu -->
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between h-16">
@@ -88,7 +88,7 @@
         <!-- Hamburger -->
         <div class="-mr-2 flex items-center sm:hidden">
           <button @click="open = ! open"
-            class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out">
+            class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
             <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
               <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round"
                 stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -104,9 +104,26 @@
   <!-- Responsive Navigation Menu -->
   <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
     <div class="pt-2 pb-3 space-y-1">
-      <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-        {{ __('Dashboard') }}
+      @can('view requests')
+      <x-responsive-nav-link :href="route('item_request.index')" :active="request()->routeIs('item_request.index')">
+        {{ __('Item Request') }}
       </x-responsive-nav-link>
+      @endcan
+      @can('view products')
+      <x-responsive-nav-link :href="route('product.index')" :active="request()->routeIs('product.index')">
+        {{ __('Products') }}
+      </x-responsive-nav-link>
+      @endcan
+      @can('view customers')
+      <x-responsive-nav-link :href="route('customer.index')" :active="request()->routeIs('customer.index')">
+        {{ __('Customers') }}
+      </x-responsive-nav-link>
+      @endcan
+      @can('view users')
+      <x-responsive-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
+        {{ __('Users') }}
+      </x-responsive-nav-link>
+      @endcan
     </div>
 
     <!-- Responsive Settings Options -->

@@ -58,7 +58,7 @@ class ProductsDataTable extends DataTable
       ->minifiedAjax()
       ->orderBy(0)
       ->selectStyleSingle()
-      ->dom("<'flex justify-end'fB><tr><'flex justify-between'lp>")
+      ->dom("<'dt-top'fB><'table-container'tr><'dt-bottom'lp>")
       ->buttons($this->getButtons())
       ->lengthMenu([[10, 25, 50, 100, 250, 500, 1000, -1], [10, 25, 50, 100, 250, 500, 1000, "All"]])
       ->pageLength(50)

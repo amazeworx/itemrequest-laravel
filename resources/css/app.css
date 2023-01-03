@@ -24,7 +24,7 @@
 
 /* Custom */
 .btn {
-  @apply px-4 h-10 min-h-[40px] text-sm normal-case;
+  @apply px-4 h-[42px] min-h-[42px] text-sm normal-case;
   &.btn-sm {
     @apply px-4;
   }
@@ -37,6 +37,15 @@
       padding: 0px;
       min-height: 2rem;
     }
+  }
+  &.btn-square {
+    @apply h-12 w-12;
+  }
+}
+.btn-circle {
+  @apply h-[42px] w-[42px];
+  &:where(.btn-lg) {
+    @apply h-14 w-14;
   }
 }
 
@@ -181,7 +190,7 @@
         }
       }
       span.dtr-title {
-        @apply inline-block min-w-[130px] text-xs uppercase text-gray-400 leading-5;
+        @apply inline-block min-w-[130px] text-xs text-gray-600 leading-5 font-semibold;
       }
       span.dtr-data {
         @apply inline-block;
@@ -222,26 +231,53 @@ div.dataTables_wrapper {
       @apply w-full md:w-7/12;
     }
   }
-  div.dataTables_length {
-    @apply text-sm pt-2;
-    select {
-      @apply border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md;
-      @apply text-sm px-2 py-1.5 pr-8;
-    }
+  .dt-top {
+    @apply flex md:justify-end;
+  }
+  .dt-bottom {
+    @apply flex flex-col lg:flex-row lg:justify-between pt-3;
   }
   div.dataTables_filter {
+    @apply mt-0 grow sm:grow-0;
     label {
       @apply flex items-center text-sm gap-x-2;
+      > span {
+        @apply hidden;
+      }
     }
     input {
-      @apply focus:border-indigo-500 focus:ring-indigo-500 rounded-md ml-0 text-sm leading-6 border border-gray-300 py-2 px-4;
+      @apply rounded-md ml-0 text-sm leading-6 border border-gray-300 py-2 px-4 focus:border-indigo-500 focus:ring-indigo-500 w-full;
+    }
+  }
+  div.dt-buttons {
+    @apply flex-none text-right flex items-center space-x-3;
+    .dt-button {
+      &.btn-primary {
+        @apply min-h-[42px] h-[42px] px-4 inline-flex items-center gap-x-2 text-xs normal-case rounded-md bg-gray-100 border border-gray-300 font-medium text-gray-500 hover:bg-gray-100 hover:shadow-md transition duration-200;
+        > span {
+          @apply inline-flex items-center gap-x-1;
+        }
+        .uil {
+          @apply text-[20px];
+        }
+      }
+      &:first-child {
+        @apply ml-3;
+      }
     }
   }
   div.dataTables_info {
     @apply text-sm pt-2;
   }
+  div.dataTables_length {
+    @apply text-xs pt-0 order-2 lg:order-1 mb-4 text-center lg:text-left;
+    select {
+      @apply border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md;
+      @apply text-xs px-2 py-1.5 pr-8;
+    }
+  }
   div.dataTables_paginate {
-    @apply flex justify-end pt-2 float-none text-right text-xs;
+    @apply order-1 lg:order-2 flex justify-center lg:justify-end pt-0 float-none text-center lg:text-right text-xs mt-0 mb-4;
     ul.pagination {
       @apply m-0 flex text-sm;
       .page-link {
@@ -294,39 +330,51 @@ div.dataTables_wrapper {
       }
     }
   }
-  div.dt-buttons {
-    @apply text-right flex items-center space-x-3;
-    .dt-button {
-      &.btn-primary {
-        @apply min-h-[42px] h-[42px] px-4 inline-flex items-center gap-x-2 text-xs normal-case rounded-md bg-gray-100 border border-gray-300 font-medium text-gray-500 hover:bg-gray-100 hover:shadow-md transition duration-200;
-        > span {
-          @apply inline-flex items-center gap-x-1;
-        }
-        .uil {
-          @apply text-[20px];
-        }
-      }
-      &:first-child {
-        @apply ml-3;
-      }
-    }
-  }
   span.select-info {
     @apply hidden;
   }
 }
 
+.table-container {
+  @apply -mx-4 sm:-mx-0;
+}
 #table-item-request,
 #table-products,
 #table-customers,
 #table-users {
+  @apply border-r-0 border-l-0 rounded-none sm:border-r sm:border-l sm:rounded-lg;
+  thead {
+    th,
+    td {
+      &:first-child {
+        @apply rounded-none sm:rounded-tl-lg;
+      }
+      &:last-child {
+        @apply rounded-none sm:rounded-tr-lg;
+      }
+    }
+  }
   tbody {
     tr {
+      th,
+      td {
+        @apply text-xs xl:text-sm;
+      }
       td {
         @apply cursor-pointer;
       }
     }
   }
+}
+:where(.table *:first-child)
+  :where(*:first-child)
+  :where(th, td):first-child
+  .input-error {
+  @apply !border-red-500;
+}
+
+.modal-box {
+  @apply max-h-screen w-full md:w-[91.666667%] md:max-h-[calc(100vh-5em)];
 }
 
 .input-error {

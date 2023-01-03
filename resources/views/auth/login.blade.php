@@ -1,12 +1,14 @@
-{{-- https://qadrlabs.com/post/belajar-laravel-8-roles-and-permissions --}}
-
 <x-guest-layout>
   <x-auth-card>
     <x-slot name="logo">
       <a href="/">
-        <x-application-logo class="w-20 h-20 text-primary" />
+        <x-application-logo class="w-14 h-14 text-primary sm:w-20 sm:h-20" />
       </a>
     </x-slot>
+
+    <h2 class="font-semibold text-2xl text-gray-800 leading-tight mb-6 sm:hidden">
+      {{ __('Login') }}
+    </h2>
 
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
@@ -36,23 +38,19 @@
       <div class="block mt-4">
         <label for="remember_me" class="inline-flex items-center">
           <input id="remember_me" type="checkbox"
-            class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800"
-            name="remember">
-          <span class="ml-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
+            class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
+          <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
         </label>
       </div>
 
-      <div class="flex items-center justify-end mt-4">
+      <div class="flex flex-col justify-center items-center mt-6">
+        <button class="btn btn-primary w-full text-center">{{ __('Log in') }}</button>
         @if (Route::has('password.request'))
-        <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+        <a class="underline inline-block mt-4 text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           href="{{ route('password.request') }}">
           {{ __('Forgot your password?') }}
         </a>
         @endif
-
-        <x-buttons.button-primary class="ml-3">
-          {{ __('Log in') }}
-        </x-buttons.button-primary>
       </div>
     </form>
   </x-auth-card>

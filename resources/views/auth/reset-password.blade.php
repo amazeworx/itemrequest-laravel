@@ -2,7 +2,7 @@
   <x-auth-card>
     <x-slot name="logo">
       <a href="/">
-        <x-application-logo class="w-20 h-20 text-primary" />
+        <x-application-logo class="w-14 h-14 text-primary sm:w-20 sm:h-20" />
       </a>
     </x-slot>
 
@@ -37,8 +37,8 @@
         <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
       </div>
 
-      <div class="flex items-center justify-end mt-4">
-        <x-buttons.button-primary>
+      <div class="flex items-center mt-4">
+        <x-buttons.button-primary class="w-full">
           {{ __('Reset Password') }}
         </x-buttons.button-primary>
       </div>

@@ -1,8 +1,9 @@
 <div class="edit-customer-modal">
   <input type="checkbox" id="edit-customer" class="modal-toggle" />
-  <div class="modal z-40">
+  <div class="modal modal-bottom md:modal-middle z-40">
     <div class="modal-box p-0 relative">
-      <div class="p-6">
+      <label for="edit-customer" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+      <div class="p-4 sm:p-6">
         <h3 class="mb-4 text-xl font-medium text-gray-900">{{ __('Edit Customer') }}</h3>
         <div class="mt-6 space-y-4">
 
@@ -20,11 +21,13 @@
           <div>
             <x-input-label for="edit_customer_name" :value="__('Nama Customer')" />
             <x-text-input id="edit_customer_name" type="text" class="mt-1 block w-full" />
+            <x-forms.input-error id="error_create_customer_name"></x-forms.input-error>
           </div>
 
           <div>
             <x-input-label for="edit_customer_phone" :value="__('Phone')" />
             <x-text-input id="edit_customer_phone" type="number" class="mt-1 block w-full" />
+            <x-forms.input-error id="error_create_customer_name"></x-forms.input-error>
           </div>
 
           <div>
@@ -76,11 +79,13 @@
                 $sales->name }}</option>
               @endforeach
             </select>
+            <x-forms.input-error id="error_create_customer_salesman_current"></x-forms.input-error>
           </div>
 
           <div id="edit_customer_salesman_previous_container" style="display: none">
             <x-input-label for="edit_customer_salesman_previous" :value="__('Sales Sebelumnya')" />
             <x-text-input id="edit_customer_salesman_previous" type="text" class="mt-1 block w-full" />
+            <x-forms.input-error id="error_create_customer_salesman_previous"></x-forms.input-error>
           </div>
 
           <div>

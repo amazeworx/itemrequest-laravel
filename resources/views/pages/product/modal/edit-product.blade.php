@@ -1,9 +1,9 @@
 <div class="edit-product-modal">
   <input type="checkbox" id="edit-product" class="modal-toggle" />
-  <div class="modal z-40">
-    <div class="modal-box p-0 relative max-w-2xl">
+  <div class="modal modal-bottom md:modal-middle z-40">
+    <div class="modal-box p-0 relative !max-w-2xl">
       <label for="edit-product" class="btn btn-sm btn-circle absolute right-2 top-2 z-50">✕</label>
-      <div class="p-6">
+      <div class="p-4 sm:p-6">
         <h3 class="mb-4 text-xl font-medium text-gray-900">{{ __('Edit Product') }}</h3>
         <div class="mt-6 space-y-4">
 
@@ -16,18 +16,19 @@
             </div>
           </div>
 
-          <div class="flex gap-x-4">
-            <div class="w-2/3">
+          <div class="flex flex-wrap gap-4 md:flex-nowrap">
+            <div class="w-full md:w-2/3">
               <x-input-label for="edit_product_name" :value="__('Nama Barang')" />
               <x-forms.text-input id="edit_product_name" type="text" placeholder="" class="mt-1 block w-full" />
+              <x-forms.input-error id="error_edit_product_name"></x-forms.input-error>
             </div>
-            <div class="w-1/3">
+            <div class="w-full md:w-1/3">
               <x-input-label for="edit_product_sku" :value="__('Kode Barang / SKU')" />
               <x-forms.text-input id="edit_product_sku" type="text" placeholder="" class="mt-1 block w-full" />
             </div>
           </div>
 
-          <div class="flex gap-x-4">
+          <div class="grid grid-cols-2 gap-x-4 gap-y-4 md:grid-cols-4">
             <div>
               <x-input-label for="edit_product_brand" :value="__('Merek Mobil')" />
               <x-forms.text-input id="edit_product_brand" type="text" placeholder="" class="mt-1 block w-full" />
@@ -46,15 +47,14 @@
             </div>
           </div>
 
-
           @canany('edit product buy price|edit product resell price|edit product retail price')
-          <div class="flex gap-x-4">
+          <div class="flex flex-wrap gap-4 md:flex-nowrap md:gap-x-4">
             @else
             <div class="hidden">
               @endcanany
 
               @can('edit product buy price')
-              <div class="grow">
+              <div class="w-full">
                 @else
                 <div class="hidden">
                   @endcan
@@ -64,7 +64,7 @@
                 </div>
 
                 @can('edit product resell price')
-                <div class="grow">
+                <div class="w-full md:w-1/2">
                   @else
                   <div class="hidden">
                     @endcan
@@ -74,7 +74,7 @@
                   </div>
 
                   @can('edit product retail price')
-                  <div class="grow">
+                  <div class="w-full md:w-1/2">
                     @else
                     <div class="hidden">
                       @endcan

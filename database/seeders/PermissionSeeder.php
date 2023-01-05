@@ -28,10 +28,20 @@ class PermissionSeeder extends Seeder
     Permission::create(['name' => 'delete requests']);
     Permission::create(['name' => 'export requests']);
     Permission::create(['name' => 'import requests']);
+    Permission::create(['name' => 'view own request']);
     Permission::create(['name' => 'edit own request']);
     Permission::create(['name' => 'delete own request']);
     Permission::create(['name' => 'create supplier requests']);
     Permission::create(['name' => 'edit supplier requests']);
+    Permission::create(['name' => 'view buy price']);
+    Permission::create(['name' => 'create buy price']);
+    Permission::create(['name' => 'edit buy price']);
+    Permission::create(['name' => 'view resell price']);
+    Permission::create(['name' => 'create resell price']);
+    Permission::create(['name' => 'edit resell price']);
+    Permission::create(['name' => 'view retail price']);
+    Permission::create(['name' => 'create retail price']);
+    Permission::create(['name' => 'edit retail price']);
 
     Permission::create(['name' => 'view products']);
     Permission::create(['name' => 'create products']);
@@ -48,6 +58,7 @@ class PermissionSeeder extends Seeder
     Permission::create(['name' => 'view product buy price']);
     Permission::create(['name' => 'create product buy price']);
     Permission::create(['name' => 'edit product buy price']);
+    Permission::create(['name' => 'view own product']);
     Permission::create(['name' => 'edit own product']);
     Permission::create(['name' => 'delete own product']);
 
@@ -73,7 +84,6 @@ class PermissionSeeder extends Seeder
     //create roles and assign existing permissions
     $salesRole = Role::create(['name' => 'sales']);
     $salesRole->givePermissionTo('view requests');
-    $salesRole->givePermissionTo('update status requests');
     $salesRole->givePermissionTo('create requests');
     $salesRole->givePermissionTo('edit own request');
     $salesRole->givePermissionTo('view products');
@@ -82,6 +92,15 @@ class PermissionSeeder extends Seeder
     $salesRole->givePermissionTo('view customers');
     $salesRole->givePermissionTo('create customers');
     $salesRole->givePermissionTo('edit customers');
+    $salesRole->givePermissionTo('view product resell price');
+    $salesRole->givePermissionTo('create product resell price');
+    $salesRole->givePermissionTo('edit product resell price');
+    $salesRole->givePermissionTo('view product retail price');
+    $salesRole->givePermissionTo('create product retail price');
+    $salesRole->givePermissionTo('edit product retail price');
+    $salesRole->givePermissionTo('view own product');
+    $salesRole->givePermissionTo('edit own product');
+    $salesRole->givePermissionTo('delete own product');
 
     $purchasingRole = Role::create(['name' => 'purchasing']);
     $purchasingRole->givePermissionTo('view requests');
@@ -91,18 +110,9 @@ class PermissionSeeder extends Seeder
     $purchasingRole->givePermissionTo('view products');
     $purchasingRole->givePermissionTo('create products');
     $purchasingRole->givePermissionTo('edit products');
-    $purchasingRole->givePermissionTo('view product retail price');
-    $purchasingRole->givePermissionTo('create product retail price');
-    $purchasingRole->givePermissionTo('edit product retail price');
-    $purchasingRole->givePermissionTo('view product resell price');
-    $purchasingRole->givePermissionTo('create product resell price');
-    $purchasingRole->givePermissionTo('edit product resell price');
     $purchasingRole->givePermissionTo('view product buy price');
     $purchasingRole->givePermissionTo('create product buy price');
     $purchasingRole->givePermissionTo('edit product buy price');
-    $purchasingRole->givePermissionTo('view customers');
-    $purchasingRole->givePermissionTo('create customers');
-    $purchasingRole->givePermissionTo('edit customers');
 
     // create demo users
     $user = User::factory()->create([

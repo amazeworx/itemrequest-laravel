@@ -127,17 +127,6 @@ class ProductController extends Controller
   }
 
   /**
-   * Show the form for editing the specified resource.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function edit($id)
-  {
-    //
-  }
-
-  /**
    * Update the specified resource in storage.
    *
    * @param  \Illuminate\Http\Request  $request
@@ -146,9 +135,68 @@ class ProductController extends Controller
    */
   public function update(Request $request, Product $product)
   {
-    $validator = Validator::make($request->all(), [
+    if ($request->action == 'update-price-buy') {
+
+      $rules = [
+        'price_buy' => 'required',
+      ];
+      $messages = [
+        'price_buy.required' => 'Harga Beli wajib diisi',
+      ];
+      $validator = Validator::make($request->all(), $rules, $messages);
+
+      if ($validator->fails()) {
+        return response()->json($validator->errors(), 422);
+      }
+
+      // update product
+      $product->update([
+        'price_buy' => $request->price_buy
+      ]);
+
+      //return response
+      return response()->json([
+        'success' => true,
+        'message' => 'Product berhasil disimpan.',
+        'data'    => $product
+      ]);
+    } else if ($request->action == 'update-price-sell') {
+
+      $rules = [
+        'price_resell' => 'required_without:price_retail',
+        'price_retail' => 'required_without:price_resell',
+      ];
+      $messages = [
+        'price_resell.required_without' => 'Salah satu harga jual wajib diisi',
+        'price_retail.required_without' => 'Salah satu harga jual wajib diisi',
+      ];
+      $validator = Validator::make($request->all(), $rules, $messages);
+
+      if ($validator->fails()) {
+        return response()->json($validator->errors(), 422);
+      }
+
+      // update product
+      $product->update([
+        'price_resell' => $request->price_resell,
+        'price_retail' => $request->price_retail
+      ]);
+
+      //return response
+      return response()->json([
+        'success' => true,
+        'message' => 'Product berhasil disimpan.',
+        'data'    => $product
+      ]);
+    }
+
+    $rules = [
       'name' => 'required',
-    ]);
+    ];
+    $messages = [
+      'name.required' => 'Nama Barang wajib diisi',
+    ];
+    $validator = Validator::make($request->all(), $rules, $messages);
 
     //check if validation fails
     if ($validator->fails()) {

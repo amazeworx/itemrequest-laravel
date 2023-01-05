@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\CustomerController;
 use App\Http\Controllers\Api\ItemRequestController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,3 +42,5 @@ Route::get('search/customer', [CustomerController::class, 'search'])->name('api.
 Route::post('import/item_request', [ItemRequestController::class, 'import'])->name('api.import.item_request');
 Route::post('import/product', [ProductController::class, 'import'])->name('api.import.product');
 Route::post('import/customer', [CustomerController::class, 'import'])->name('api.import.customer');
+
+Route::post('comment', [CommentController::class, 'store'])->name('api.comment.create');

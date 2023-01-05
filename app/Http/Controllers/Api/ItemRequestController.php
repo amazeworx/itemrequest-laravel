@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Customer;
 use App\Models\CustomerType;
 use App\Models\StatusRequest;
+use App\Models\Comment;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -57,6 +58,15 @@ class ItemRequestController extends Controller
       'request_code' => $request_code,
     ]);
 
+    $comment = $request->comment;
+    if ($comment) {
+      Comment::create([
+        'comment' => $request->comment,
+        'item_request_id' => $request_id,
+        'user_id' => $request->user_id,
+      ]);
+    }
+
     //return response
     return response()->json([
       'success' => true,
@@ -82,6 +92,7 @@ class ItemRequestController extends Controller
     $previous_salesman = User::where('id', $customer->previous_salesman_id)->first();
     $user = User::where('id', $item->user_id)->first();
     $status = StatusRequest::where('id', $item->status_id)->first();
+    $comments = Comment::where('item_request_id', $item_request)->with('user')->get();
 
     $previous_salesman_id = NULL;
     $previous_salesman_name = NULL;
@@ -145,7 +156,7 @@ class ItemRequestController extends Controller
         'id' => $item->user_id,
         'name' => $user->name,
       ],
-      'notes' => $item->notes,
+      'comments' => $comments,
       'created_at' => $item->created_at,
       'updated_at' => $item->updated_at,
       'deleted_at' => $item->deleted_at

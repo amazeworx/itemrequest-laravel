@@ -8,15 +8,14 @@
 
         <input type="hidden" id="view_item_id">
         <input type="hidden" id="view_product_id">
+        <input type="hidden" id="view_user_id" value="{{ $current_user_id }}" />
 
-        <div>
-          <div class="border-t py-3">
-            <div class="grid grid-cols-1">
-              <div>
-                <div class="font-semibold text-xs md:text-sm text-slate-400 uppercase mb-1">Nama Barang</div>
-                <div id="view--data-product_name" class="font-bold text-lg sm:text-xl"></div>
-              </div>
-              <div class="grid grid-cols-2 md:grid-cols-3 text-xs sm:text-sm mt-2 gap-x-2 gap-y-1">
+        <div class="border-t py-2">
+          <div class="py-1.5">
+            <div class="font-semibold text-xs md:text-sm text-slate-400 uppercase mb-1">Nama Barang</div>
+            <div class="bg-slate-100 py-2 px-3 rounded-lg md:py-3 md:px-4">
+              <div id="view--data-product_name" class="font-bold text-lg sm:text-xl mb-3"></div>
+              <div class="grid grid-cols-3 md:grid-cols-5 text-xs sm:text-sm mt-2 gap-x-2 gap-y-1">
                 <div id="view-product_sku">
                   <div class="text-slate-400 uppercase font-semibold text-xs sm:text-xs">SKU</div>
                   <div id="view--data-product_sku"></div>
@@ -42,38 +41,36 @@
           </div>
 
           @can('view product buy price')
-          <div>
-            <div class="py-3 border-t">
-              <div class="font-semibold text-xs md:text-sm text-slate-400 uppercase sm:mb-1">Harga Beli</div>
-              <div id="view--display-product_price_buy">
-                <div class="flex">
-                  <div id="view--data-product_price_buy" class="font-bold text-sm sm:text-base mr-4"
-                    style="display: none">
-                  </div>
-                  @can('create product buy price')
-                  <button type="button" id="view--btn-show-update-product_buy_price"
-                    class="link link-primary text-xs">Set Harga
-                    Beli</button>
-                  @endcan
+          <div class="py-1.5">
+            <div class="font-semibold text-xs md:text-sm text-slate-400 uppercase sm:mb-1">Harga Beli</div>
+            <div id="view--display-product_price_buy">
+              <div class="flex">
+                <div id="view--data-product_price_buy" class="font-bold text-sm sm:text-base mr-4"
+                  style="display: none">
                 </div>
+                @can('create product buy price')
+                <button type="button" id="view--btn-show-update-product_buy_price" class="link link-primary text-xs">Set
+                  Harga
+                  Beli</button>
+                @endcan
               </div>
-              <div id="view--update-product_price_buy" class="hidden">
-                <x-forms.text-input id="view--input-product_price_buy" type="text" class="mt-1 block w-full max-w-xs" />
-                <x-forms.input-error id="error_product_price_buy"></x-forms.input-error>
-                <div class="flex gap-2 mt-2">
-                  <button type="button" id="view--btn-submit-update-product_price_buy"
-                    class="btn btn-primary btn-sm">Update</button>
-                  <button type="button" id="view--btn-cancel-update-product_price_buy"
-                    class="btn btn-ghost btn-sm">Cancel</button>
-                </div>
-              </div>
-
             </div>
+            <div id="view--update-product_price_buy" class="hidden">
+              <x-forms.text-input id="view--input-product_price_buy" type="text" class="mt-1 block w-full max-w-xs" />
+              <x-forms.input-error id="error_product_price_buy"></x-forms.input-error>
+              <div class="flex gap-2 mt-2">
+                <button type="button" id="view--btn-submit-update-product_price_buy"
+                  class="btn btn-primary btn-sm">Update</button>
+                <button type="button" id="view--btn-cancel-update-product_price_buy"
+                  class="btn btn-ghost btn-sm">Cancel</button>
+              </div>
+            </div>
+
           </div>
           @endcan
 
           @canany(['view product resell price','view product retail price'])
-          <div class="py-3 border-t">
+          <div class="py-1.5">
             <div class="font-semibold text-xs md:text-sm text-slate-400 uppercase mb-1  sm:mb-1">Harga Jual</div>
             <div id="view--display-product_price_sell">
               <div id="view--data-product_price_resell" class="font-bold text-sm sm:text-base" style="display: none">
@@ -86,7 +83,7 @@
                 Jual</button>
               @endcan
             </div>
-            <div id="view--update-product_price_sell" class="py-2 hidden">
+            <div id="view--update-product_price_sell" class="py-1.5 hidden">
               <div class="flex gap-x-3">
                 <div class="w-1/2">
                   <x-forms.input-label :value="__('Harga Jual Toko')" />
@@ -111,7 +108,7 @@
           @endcanany
 
           <div class="grid grid-cols-1 md:grid-cols-2">
-            <div class="py-3 border-t md:pr-2">
+            <div class="py-1.5 md:pr-2">
               <div class="font-semibold text-xs md:text-sm text-slate-400 uppercase sm:mb-1">Status</div>
               <div id="view--display-status" class="flex gap-x-4">
                 <div id="view--data-status" class="font-bold text-sm sm:text-base"></div>
@@ -136,7 +133,7 @@
               @endcan
             </div>
             @can('view customers')
-            <div class="py-3 border-t md:pl-2">
+            <div class="py-1.5 md:pl-2">
               <div class="font-semibold text-xs md:text-sm text-slate-400 uppercase sm:mb-1">Customer</div>
               <div>
                 <span id="view--data-customer_name" class="font-bold text-sm sm:text-base"></span> <span
@@ -145,7 +142,7 @@
             </div>
             @endcan
             @role('purchasing')
-            <div class="py-3 border-t md:pl-2">
+            <div class="py-1.5 md:pl-2">
               <div class="font-semibold text-xs md:text-sm text-slate-400 uppercase sm:mb-1">Sales</div>
               <div>
                 <span id="view--data-salesman_name" class="font-bold text-sm sm:text-base"></span> <span
@@ -155,18 +152,31 @@
             @endrole
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2">
-            <div class="py-3 border-t">
+            <div class="py-1.5 md:pr-2">
               <div class="font-semibold text-xs md:text-sm text-slate-400 uppercase sm:mb-1">No Request</div>
               <div id="view--data-request_code" class="font-bold text-sm sm:text-base"></div>
             </div>
-            <div class="py-3 border-t">
+            <div class="py-1.5 md:pl-2">
               <div class="font-semibold text-xs md:text-sm text-slate-400 uppercase sm:mb-1">Tanggal Request</div>
               <div id="view--data-request_date" class="font-bold text-sm sm:text-base"></div>
             </div>
           </div>
-          <div id="view-product_notes" class="py-3 border-t" style="display: none">
-            <div class="font-semibold text-xs md:text-sm text-slate-400 uppercase sm:mb-1">Notes</div>
-            <div id="view--data-notes" class="text-sm sm:text-base">
+        </div>
+
+        <div id="comments-container"
+          class="hidden border-t py-4 sm:py-6 mt-2 -mx-4 -mb-4 sm:-mx-6 sm:-mb-6 bg-gray-100">
+          <div class="px-4">
+            <div class="font-semibold text-xs md:text-sm text-slate-400 uppercase mb-2">Comments</div>
+            <div id="comments" class="flex flex-col gap-y-3">
+            </div>
+            <div class="pt-4">
+              <x-forms.input-label for="view-create_comment" :value="__('Add Comment')" />
+              <x-forms.text-area id="view-create_comment" rows="4" class="text-sm" />
+              <x-forms.input-error id="error_view-create_comment"></x-forms.input-error>
+              <div class="mt-2">
+                <button id="btn-submit-view-create-comment" type="button" class="btn btn-sm btn-primary">{{ __('Submit')
+                  }}</button>
+              </div>
             </div>
           </div>
         </div>
@@ -187,6 +197,24 @@
         type: "GET",
         cache: false,
         success:function(response){
+          $('#view--data-status').text('');
+          $('#view--select-update-status').val('');
+          $('#view--data-request_date').text('');
+          $('#view--data-request_code').text('');
+          $('#view--data-customer_name').text('');
+          $('#view--data-cutomer_type').text('');
+          $('#view--data-salesman_name').text('');
+          $('#view--data-salesman_whatsapp').text('');
+          $("#view_product_id").val('');
+          $('#view--data-product_sku').text('');
+          $('#view--data-product_brand').text('');
+          $('#view--data-product_year').text('');
+          $('#view--data-product_cc').text('');
+          $('#view--data-product_engine').text('');
+          $('#view--data-product_price_buy').html('');
+          $('#view--data-product_price_resell').html('');
+          $('#view--data-product_price_retail').html('');
+          $('#comments').html('');
           //console.log(response);
           //open modal
           let request_date = response.data.request_date.split(' ')[0];
@@ -208,7 +236,7 @@
           let product_price_resell = response.data.product.price_resell;
           let product_price_retail = response.data.product.price_retail;
           let product_engine = response.data.product.engine;
-          let notes = response.data.notes;
+          let comments = response.data.comments;
           $('#view--data-status').text(status);
           $('#view--select-update-status').val(status_id);
           $('#view--data-request_date').text(request_date_reverse);
@@ -251,8 +279,19 @@
             $('#view--input-product_price_retail').val(Math.round(product_price_retail));
             $('#view--data-product_price_retail').html('Rp' + new Intl.NumberFormat('id-ID').format(product_price_retail) + ' <span class="text-xs text-slate-500 font-normal">(Harga User)</span>').show();
           }
-          if (notes) {
-            $('#view--data-notes').text(notes);
+          if (comments) {
+            $('#comments-container').show();
+            let comment;
+            let len = comments.length;
+            //console.log(comments);
+            for (let i = 0; i < len; i++) {
+              comment = '<div class="bg-white px-3 pt-1.5 pb-2 md:px-4 md:pt-2 md:pb-2.5 rounded-lg">'
+                + '<div class="mb-1"><span class="font-bold text-xs">' + comments[i].user.name + '</span>&nbsp;&nbsp;<span class="text-xs text-slate-400">' + new Date(comments[i].created_at).toLocaleString('id-ID') + '</span></div>'
+                + '<div class="text-sm">' + comments[i].comment + '</div>'
+                + '</div>';
+              $('#comments').append(comment);
+            }
+            //$('#view--data-notes').text(notes);
           }
           $('#view-item-request').prop('checked', true);
 
@@ -262,6 +301,40 @@
     // let item_request_id = '23001';
     // $("#view_item_id").val('23001');
     // load_item_request(item_request_id);
+
+    $(document).on("click", "#btn-submit-view-create-comment", function(e) {
+      e.preventDefault();
+      let item_request_id = $("#view_item_id").val();
+      let comment = $('#view-create_comment').val();
+      let user_id = $('#view_user_id').val();
+      let token   = $("meta[name='csrf-token']").attr("content");
+      //console.log(status_id);
+      $.ajax({
+        url: `/api/comment`,
+        type: "POST",
+        cache: false,
+        data: {
+          "item_request_id": item_request_id,
+          "user_id": user_id,
+          "comment": comment,
+          "_token": token
+        },
+        success: function(response) {
+          //$('#edit-item-request').prop('checked', false);
+          window.location.href = "{{url('/item_request?status=comment-created')}}";
+        },
+        error: function(error) {
+          console.log(error);
+          if(error.responseJSON.comment) {
+            $('#view-create_comment').addClass('input-error');
+            $('#error_view-create_comment').text(error.responseJSON.comment).show();
+          } else {
+            $('#view-create_comment').removeClass('input-error');
+            $('#error_view-create_comment').hide();
+          }
+        }
+      });
+    });
     /*
     * View Item Request
     */

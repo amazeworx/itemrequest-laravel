@@ -119,11 +119,47 @@ class ItemRequestsDataTable extends DataTable
         ->title('Customer');
       array_push($columns, $customer);
     }
-    $salesman = Column::make('salesman.name')
-      ->responsivePriority(5)
-      ->title('Sales');
-    array_push($columns, $salesman);
-
+    if (auth()->user()->can('view product resell price')) {
+      $price_resell = Column::make('product.price_resell')
+        ->responsivePriority(5)
+        ->content('-')
+        ->renderRaw("
+          function ( data ) {
+            return new Intl.NumberFormat('id-ID').format(data);
+          }
+          ")
+        ->title('Harga Toko');
+      array_push($columns, $price_resell);
+    }
+    if (auth()->user()->can('view product retail price')) {
+      $price_retail = Column::make('product.price_retail')
+        ->responsivePriority(5)
+        ->content('-')
+        ->renderRaw("
+          function ( data ) {
+            return new Intl.NumberFormat('id-ID').format(data);
+          }
+          ")
+        ->title('Harga User');
+      array_push($columns, $price_retail);
+    }
+    if (auth()->user()->can('view product buy price')) {
+      $price_buy = Column::make('product.price_buy')
+        ->responsivePriority(6)
+        ->renderRaw("
+          function ( data ) {
+            return new Intl.NumberFormat('id-ID').format(data);
+          }
+          ")
+        ->title('Harga Beli');
+      array_push($columns, $price_buy);
+    }
+    if (auth()->user()->hasAnyRole(['super-admin', 'purchasing'])) {
+      $salesman = Column::make('salesman.name')
+        ->responsivePriority(5)
+        ->title('Sales');
+      array_push($columns, $salesman);
+    }
     $status = Column::make('status.name')
       ->responsivePriority(2)
       ->title('Status');
@@ -157,12 +193,12 @@ class ItemRequestsDataTable extends DataTable
       ->addClass('none');
     array_push($columns, $product_engine);
 
-    $created_by = Column::make('user.name')
-      ->title('Created By')
-      ->content('-')
-      ->addClass('none')
-      ->responsivePriority(10);
-    array_push($columns, $created_by);
+    // $created_by = Column::make('user.name')
+    //   ->title('Created By')
+    //   ->content('-')
+    //   ->addClass('none')
+    //   ->responsivePriority(10);
+    // array_push($columns, $created_by);
 
     $control = Column::computed('control')
       ->title('')

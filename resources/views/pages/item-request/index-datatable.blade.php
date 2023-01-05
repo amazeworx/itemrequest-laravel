@@ -136,6 +136,24 @@ $current_user_id = auth()->user()->id;
           window.history.replaceState({}, document.title, "/" + "item_request");
         });
       }
+      if (status == 'comment-created') {
+        Swal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: 'success',
+          text: 'Berhasil menambahkan komentar',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 3000,
+          iconColor: 'white',
+          customClass: {
+            popup: 'colored-toast'
+          },
+        }).then(function (e) {
+          //console.log(e);
+          window.history.replaceState({}, document.title, "/" + "item_request");
+        });
+      }
 
       /*
        * Fetch Edit Item Request

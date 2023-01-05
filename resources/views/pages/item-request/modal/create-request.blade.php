@@ -59,8 +59,8 @@
             </div>
 
             <div>
-              <x-forms.input-label for="create_notes" :value="__('Catatan')" />
-              <x-forms.text-area id="create_notes" rows="4" class="text-sm" />
+              <x-forms.input-label for="create_comment" :value="__('Comment')" />
+              <x-forms.text-area id="create_comment" rows="4" class="text-sm" />
             </div>
 
             <div>
@@ -353,7 +353,7 @@
       let customer_id = $('#create_customer_id').val();
       let product_id = $('#create_product_id').val();
       let status_id = $('#create_status_id').val();
-      let notes = $('#create_notes').val();
+      let comment = $('#create_comment').val();
       let user_id = $('#create_user_id').val();
       let token   = $("meta[name='csrf-token']").attr("content");
       //console.log(request_date);
@@ -368,7 +368,7 @@
           "customer_id": customer_id,
           "product_id": product_id,
           "status_id": status_id,
-          "notes": notes,
+          "comment": comment,
           "user_id": user_id,
           "_token": token
         },

@@ -8,12 +8,12 @@
           <h3 class="mb-4 text-xl font-medium text-gray-900">{{ __('Add New Item Request') }}</h3>
           <div class="mt-6 space-y-4">
 
-            <div id="create-form-error-message" class="hidden">
+            {{-- <div id="create-form-error-message" class="hidden">
               <div class="inline-flex space-x-2 items-center text-xs text-error">
                 <span class="flex-none inline-block w-5 h-3 rounded border border-solid border-error"></span>
                 <span class="inline-block">Wajib diisi</span>
               </div>
-            </div>
+            </div> --}}
 
             <input type="hidden" id="create_user_id" value="{{ $current_user_id }}" />
 
@@ -379,7 +379,7 @@
         error: function(error) {
           //...
           //console.log(error);
-          $('#create-form-error-message').show();
+          //$('#create-form-error-message').show();
           if(error.responseJSON.product_id) {
             $('#create_product_id').addClass('select-error');
           } else {

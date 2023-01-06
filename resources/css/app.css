@@ -377,6 +377,7 @@ div.dataTables_wrapper {
   @apply max-h-screen w-full md:w-[91.666667%] md:max-h-[calc(100vh-5em)];
 }
 
-.input-error {
+.input-error,
+.select-error {
   @apply !border-red-500;
 }

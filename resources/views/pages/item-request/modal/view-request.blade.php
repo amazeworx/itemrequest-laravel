@@ -212,11 +212,11 @@
           $('#view--data-product_cc').text('');
           $('#view--data-product_engine').text('');
           $('#view--data-product_price_buy').html('');
-          $('#view--input-product_price_buy').val();
+          $('#view--input-product_price_buy').val('');
           $('#view--data-product_price_resell').html('');
-          $('#view--input-product_price_resell').val();
+          $('#view--input-product_price_resell').val('');
           $('#view--data-product_price_retail').html('');
-          $('#view--input-product_price_resell').val();
+          $('#view--input-product_price_resell').val('');
           $('#comments').html('');
           //console.log(response);
           //open modal

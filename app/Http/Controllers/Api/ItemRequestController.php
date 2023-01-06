@@ -47,7 +47,6 @@ class ItemRequestController extends Controller
       'product_id' => $request->product_id,
       'status_id' => $request->status_id,
       'user_id' => $request->user_id,
-      'notes' => $request->notes,
     ]);
 
     $request_id = $item_request->id;

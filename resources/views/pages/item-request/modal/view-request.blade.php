@@ -528,8 +528,8 @@
         },
         success: function(response) {
           //$('#edit-item-request').prop('checked', false);
-          $('#view--display-product_price_sell').show();
-          $('#view--update-product_price_sell').hide();
+          $('#view--display-status').show();
+          $('#view--update-status').hide();
           load_item_request($("#view_item_id").val(), true);
           $('#table-item-request').DataTable().ajax.reload();
           //window.location.href = "{{url('/item_request?status=item_request-edited')}}";

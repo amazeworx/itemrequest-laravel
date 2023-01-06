@@ -370,7 +370,7 @@
           "_token": token
         },
         success: function(response) {
-          load_item_request(item_request_id, true);
+          load_item_request($("#view_item_id").val(), true);
           //$('#edit-item-request').prop('checked', false);
           //window.location.href = "{{url('/item_request?status=comment-created')}}";
         },
@@ -393,7 +393,7 @@
       e.preventDefault();
       let item_request_id = $(this).closest('tr').attr("id");
       $("#view_item_id").val($(this).closest('tr').attr("id"));
-      load_item_request(item_request_id, true);
+      load_item_request($("#view_item_id").val(), true);
     });
 
     $(document).on("click", "#view--btn-show-update-product_buy_price", function(e) {
@@ -473,7 +473,7 @@
         success: function(response) {
           $('#view--display-product_price_sell').show();
           $('#view--update-product_price_sell').hide();
-          load_item_request(item_request_id, true);
+          load_item_request($("#view_item_id").val(), true);
           //$('#edit-item-request').prop('checked', false);
           //window.location.href = "{{url('/item_request?status=item_request-edited')}}";
         },

@@ -2,181 +2,202 @@
   <input type="checkbox" id="view-item-request" class="modal-toggle" />
   <div class="modal modal-bottom md:modal-middle z-40">
     <div class="modal-box p-0 relative !max-w-3xl">
-      <label for="view-item-request" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-      <div class="p-4 sm:p-6">
-        <h3 class="mb-4 text-xl font-semibold text-gray-900">{{ __('Item Request Detail') }}</h3>
+      <label for="view-item-request" class="btn btn-sm btn-circle absolute right-3 top-4">✕</label>
+      <div>
+        <div class="py-4 px-4 sm:pt-6 sm:px-6">
+          <h3 class="text-xl font-semibold text-gray-900">{{ __('Item Request Detail') }}</h3>
+        </div>
 
         <input type="hidden" id="view_item_id">
         <input type="hidden" id="view_product_id">
         <input type="hidden" id="view_user_id" value="{{ $current_user_id }}" />
 
-        <div class="border-t py-2">
-          <div class="py-1.5">
-            <div class="font-semibold text-xs md:text-sm text-slate-400 uppercase mb-1">Nama Barang</div>
-            <div class="bg-slate-100 py-2 px-3 rounded-lg md:py-3 md:px-4">
-              <div id="view--data-product_name" class="font-bold text-lg sm:text-xl mb-3"></div>
-              <div class="grid grid-cols-3 md:grid-cols-5 text-xs sm:text-sm mt-2 gap-x-2 gap-y-1">
-                <div id="view-product_sku">
-                  <div class="text-slate-400 uppercase font-semibold text-xs sm:text-xs">SKU</div>
-                  <div id="view--data-product_sku"></div>
+        <div>
+          <div class="border-t py-2 px-4 sm:px-6">
+            <div class="py-1.5">
+              <div class="font-semibold text-xs md:text-sm text-slate-400 uppercase mb-1">Nama Barang</div>
+              <div class="bg-slate-100 py-2 px-3 rounded-lg md:py-3 md:px-4">
+                <div id="view--data-product_name" class="font-bold text-lg sm:text-xl mb-3"></div>
+                <div class="grid grid-cols-3 md:grid-cols-5 text-xs sm:text-sm mt-2 gap-x-2 gap-y-1">
+                  <div id="view-product_sku">
+                    <div class="text-slate-400 uppercase font-semibold text-xs sm:text-xs">SKU</div>
+                    <div id="view--data-product_sku"></div>
+                  </div>
+                  <div id="view-product_brand">
+                    <div class="text-slate-400 uppercase font-semibold text-xs sm:text-xs">Merek Mobil</div>
+                    <div id="view--data-product_brand"></div>
+                  </div>
+                  <div id="view-product_year">
+                    <div class="text-slate-400 uppercase font-semibold text-xs sm:text-xs">Tahun</div>
+                    <div id="view--data-product_year"></div>
+                  </div>
+                  <div id="view-product_cc">
+                    <div class="text-slate-400 uppercase font-semibold text-xs sm:text-xs">CC</div>
+                    <div id="view--data-product_cc"></div>
+                  </div>
+                  <div id="view-product_engine">
+                    <div class="text-slate-400 uppercase font-semibold text-xs sm:text-xs">Mesin</div>
+                    <div id="view--data-product_engine"></div>
+                  </div>
                 </div>
-                <div id="view-product_brand">
-                  <div class="text-slate-400 uppercase font-semibold text-xs sm:text-xs">Merek Mobil</div>
-                  <div id="view--data-product_brand"></div>
-                </div>
-                <div id="view-product_year">
-                  <div class="text-slate-400 uppercase font-semibold text-xs sm:text-xs">Tahun</div>
-                  <div id="view--data-product_year"></div>
-                </div>
-                <div id="view-product_cc">
-                  <div class="text-slate-400 uppercase font-semibold text-xs sm:text-xs">CC</div>
-                  <div id="view--data-product_cc"></div>
-                </div>
-                <div id="view-product_engine">
-                  <div class="text-slate-400 uppercase font-semibold text-xs sm:text-xs">Mesin</div>
-                  <div id="view--data-product_engine"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          @can('view product buy price')
-          <div class="py-1.5">
-            <div class="font-semibold text-xs md:text-sm text-slate-400 uppercase sm:mb-1">Harga Beli</div>
-            <div id="view--display-product_price_buy">
-              <div class="flex">
-                <div id="view--data-product_price_buy" class="font-bold text-sm sm:text-base mr-4"
-                  style="display: none">
-                </div>
-                @can('create product buy price')
-                <button type="button" id="view--btn-show-update-product_buy_price" class="link link-primary text-xs">Set
-                  Harga
-                  Beli</button>
-                @endcan
-              </div>
-            </div>
-            <div id="view--update-product_price_buy" class="hidden">
-              <x-forms.text-input id="view--input-product_price_buy" type="text" class="mt-1 block w-full max-w-xs" />
-              <x-forms.input-error id="error_product_price_buy"></x-forms.input-error>
-              <div class="flex gap-2 mt-2">
-                <button type="button" id="view--btn-submit-update-product_price_buy"
-                  class="btn btn-primary btn-sm">Update</button>
-                <button type="button" id="view--btn-cancel-update-product_price_buy"
-                  class="btn btn-ghost btn-sm">Cancel</button>
               </div>
             </div>
 
-          </div>
-          @endcan
-
-          @canany(['view product resell price','view product retail price'])
-          <div class="py-1.5">
-            <div class="font-semibold text-xs md:text-sm text-slate-400 uppercase mb-1  sm:mb-1">Harga Jual</div>
-            <div id="view--display-product_price_sell">
-              <div id="view--data-product_price_resell" class="font-bold text-sm sm:text-base" style="display: none">
-              </div>
-              <div id="view--data-product_price_retail" class="font-bold text-sm sm:text-base" style="display: none">
-              </div>
-              @canany(['create product resell price', 'create product retail price'])
-              <button type="button" id="view--btn-show-update-product_price_sell" class="link link-primary text-xs">Set
-                Harga
-                Jual</button>
-              @endcan
-            </div>
-            <div id="view--update-product_price_sell" class="py-1.5 hidden">
-              <div class="flex gap-x-3">
-                <div class="w-1/2">
-                  <x-forms.input-label :value="__('Harga Jual Toko')" />
-                  <x-forms.text-input id="view--input-product_price_resell" type="text"
-                    class="mt-1 block w-full max-w-xs" />
-                </div>
-                <div class="w-1/2">
-                  <x-forms.input-label :value="__('Harga Jual End User')" />
-                  <x-forms.text-input id="view--input-product_price_retail" type="text"
-                    class="mt-1 block w-full max-w-xs" />
+            @can('view product buy price')
+            <div class="py-1.5">
+              <div class="font-semibold text-xs md:text-sm text-slate-400 uppercase sm:mb-1">Harga Beli</div>
+              <div id="view--display-product_price_buy">
+                <div class="flex">
+                  <div id="view--data-product_price_buy" class="font-bold text-sm sm:text-base mr-4"
+                    style="display: none">
+                  </div>
+                  @can('create product buy price')
+                  <button type="button" id="view--btn-show-update-product_buy_price"
+                    class="link link-primary text-xs">Set
+                    Harga
+                    Beli</button>
+                  @endcan
                 </div>
               </div>
-              <x-forms.input-error id="error_product_price_sell"></x-forms.input-error>
-              <div class="flex gap-2 mt-2">
-                <button type="button" id="view--btn-submit-update-product_price_sell"
-                  class="btn btn-primary btn-sm">Update</button>
-                <button type="button" id="view--btn-cancel-update-product_price_sell"
-                  class="btn btn-ghost btn-sm">Cancel</button>
-              </div>
-            </div>
-          </div>
-          @endcanany
-
-          <div class="grid grid-cols-1 md:grid-cols-2">
-            <div class="py-1.5 md:pr-2">
-              <div class="font-semibold text-xs md:text-sm text-slate-400 uppercase sm:mb-1">Status</div>
-              <div id="view--display-status" class="flex gap-x-4">
-                <div id="view--data-status" class="font-bold text-sm sm:text-base"></div>
-                @can('update status requests')
-                <button type="button" id="view--btn-show-select-status" class="link link-primary text-xs">Change
-                  Status</button>
-                @endcan
-              </div>
-              @can('update status requests')
-              <div id="view--update-status" class="hidden">
-                <x-forms.select id="view--select-update-status">
-                  @foreach ($statuses as $status)
-                  <option value="{{ $status->id }}">{{ $status->name }}</option>
-                  @endforeach
-                </x-forms.select>
+              <div id="view--update-product_price_buy" class="hidden">
+                <x-forms.text-input id="view--input-product_price_buy" type="text" class="mt-1 block w-full max-w-xs" />
+                <x-forms.input-error id="error_product_price_buy"></x-forms.input-error>
                 <div class="flex gap-2 mt-2">
-                  <button type="button" id="view--btn-submit-update-status"
+                  <button type="button" id="view--btn-submit-update-product_price_buy"
                     class="btn btn-primary btn-sm">Update</button>
-                  <button type="button" id="view--btn-cancel-update-status" class="btn btn-ghost btn-sm">Cancel</button>
+                  <button type="button" id="view--btn-cancel-update-product_price_buy"
+                    class="btn btn-ghost btn-sm">Cancel</button>
                 </div>
               </div>
-              @endcan
-            </div>
-            @can('view customers')
-            <div class="py-1.5 md:pl-2">
-              <div class="font-semibold text-xs md:text-sm text-slate-400 uppercase sm:mb-1">Customer</div>
-              <div>
-                <span id="view--data-customer_name" class="font-bold text-sm sm:text-base"></span> <span
-                  class="text-slate-400 text-sm">(<span id="view--data-cutomer_type"></span>)</span>
-              </div>
+
             </div>
             @endcan
-            @role('purchasing')
-            <div class="py-1.5 md:pl-2">
-              <div class="font-semibold text-xs md:text-sm text-slate-400 uppercase sm:mb-1">Sales</div>
-              <div>
-                <span id="view--data-salesman_name" class="font-bold text-sm sm:text-base"></span> <span
-                  class="text-slate-400 text-sm">(<span id="view--data-salesman_whatsapp"></span>)</span>
+
+            @canany(['view product resell price','view product retail price'])
+            <div class="py-1.5">
+              <div class="font-semibold text-xs md:text-sm text-slate-400 uppercase mb-1  sm:mb-1">Harga Jual</div>
+              <div id="view--display-product_price_sell">
+                <div id="view--data-product_price_resell" class="font-bold text-sm sm:text-base" style="display: none">
+                </div>
+                <div id="view--data-product_price_retail" class="font-bold text-sm sm:text-base" style="display: none">
+                </div>
+                @canany(['create product resell price', 'create product retail price'])
+                <button type="button" id="view--btn-show-update-product_price_sell"
+                  class="link link-primary text-xs">Set
+                  Harga
+                  Jual</button>
+                @endcan
+              </div>
+              <div id="view--update-product_price_sell" class="py-1.5 hidden">
+                <div class="flex gap-x-3">
+                  <div class="w-1/2">
+                    <x-forms.input-label :value="__('Harga Jual Toko')" />
+                    <x-forms.text-input id="view--input-product_price_resell" type="text"
+                      class="mt-1 block w-full max-w-xs" />
+                  </div>
+                  <div class="w-1/2">
+                    <x-forms.input-label :value="__('Harga Jual End User')" />
+                    <x-forms.text-input id="view--input-product_price_retail" type="text"
+                      class="mt-1 block w-full max-w-xs" />
+                  </div>
+                </div>
+                <x-forms.input-error id="error_product_price_sell"></x-forms.input-error>
+                <div class="flex gap-2 mt-2">
+                  <button type="button" id="view--btn-submit-update-product_price_sell"
+                    class="btn btn-primary btn-sm">Update</button>
+                  <button type="button" id="view--btn-cancel-update-product_price_sell"
+                    class="btn btn-ghost btn-sm">Cancel</button>
+                </div>
               </div>
             </div>
-            @endrole
-          </div>
-          <div class="grid grid-cols-1 md:grid-cols-2">
-            <div class="py-1.5 md:pr-2">
-              <div class="font-semibold text-xs md:text-sm text-slate-400 uppercase sm:mb-1">No Request</div>
-              <div id="view--data-request_code" class="font-bold text-sm sm:text-base"></div>
-            </div>
-            <div class="py-1.5 md:pl-2">
-              <div class="font-semibold text-xs md:text-sm text-slate-400 uppercase sm:mb-1">Tanggal Request</div>
-              <div id="view--data-request_date" class="font-bold text-sm sm:text-base"></div>
-            </div>
-          </div>
-        </div>
+            @endcanany
 
-        <div id="comments-container"
-          class="hidden border-t py-4 sm:py-6 mt-2 -mx-4 -mb-4 sm:-mx-6 sm:-mb-6 bg-gray-100">
-          <div class="px-4">
-            <div class="font-semibold text-xs md:text-sm text-slate-400 uppercase mb-2">Comments</div>
-            <div id="comments" class="flex flex-col gap-y-3">
+            <div class="grid grid-cols-1 md:grid-cols-2">
+              <div class="py-1.5 md:pr-2">
+                <div class="font-semibold text-xs md:text-sm text-slate-400 uppercase sm:mb-1">Status</div>
+                <div id="view--display-status" class="flex gap-x-4">
+                  <div id="view--data-status" class="font-bold text-sm sm:text-base"></div>
+                  @can('update status requests')
+                  <button type="button" id="view--btn-show-select-status" class="link link-primary text-xs">Change
+                    Status</button>
+                  @endcan
+                </div>
+                @can('update status requests')
+                <div id="view--update-status" class="hidden">
+                  <x-forms.select id="view--select-update-status">
+                    @foreach ($statuses as $status)
+                    <option value="{{ $status->id }}">{{ $status->name }}</option>
+                    @endforeach
+                  </x-forms.select>
+                  <div class="flex gap-2 mt-2">
+                    <button type="button" id="view--btn-submit-update-status"
+                      class="btn btn-primary btn-sm">Update</button>
+                    <button type="button" id="view--btn-cancel-update-status"
+                      class="btn btn-ghost btn-sm">Cancel</button>
+                  </div>
+                </div>
+                @endcan
+              </div>
+              @can('view customers')
+              <div class="py-1.5 md:pl-2">
+                <div class="font-semibold text-xs md:text-sm text-slate-400 uppercase sm:mb-1">Customer</div>
+                <div>
+                  <span id="view--data-customer_name" class="font-bold text-sm sm:text-base"></span> <span
+                    class="text-slate-400 text-sm">(<span id="view--data-cutomer_type"></span>)</span>
+                </div>
+              </div>
+              @endcan
+              @role('purchasing')
+              <div class="py-1.5 md:pl-2">
+                <div class="font-semibold text-xs md:text-sm text-slate-400 uppercase sm:mb-1">Sales</div>
+                <div>
+                  <span id="view--data-salesman_name" class="font-bold text-sm sm:text-base"></span> <span
+                    class="text-slate-400 text-sm">(<span id="view--data-salesman_whatsapp"></span>)</span>
+                </div>
+              </div>
+              @endrole
             </div>
-            <div class="pt-4">
+            <div class="grid grid-cols-1 md:grid-cols-2">
+              <div class="py-1.5 md:pr-2">
+                <div class="font-semibold text-xs md:text-sm text-slate-400 uppercase sm:mb-1">No Request</div>
+                <div id="view--data-request_code" class="font-bold text-sm sm:text-base"></div>
+              </div>
+              <div class="py-1.5 md:pl-2">
+                <div class="font-semibold text-xs md:text-sm text-slate-400 uppercase sm:mb-1">Tanggal Request</div>
+                <div id="view--data-request_date" class="font-bold text-sm sm:text-base"></div>
+              </div>
+            </div>
+          </div>
+          <div id="comments-container" class="hidden border-t mt-2 bg-gray-100">
+            <div class="px-4 py-6 sm:px-6 sm:py-6">
+              <div class="font-semibold text-xs md:text-sm text-slate-400 uppercase mb-2">Comments</div>
+              <div id="comments" class="flex flex-col gap-y-2">
+              </div>
+            </div>
+            <div class="px-4 py-6 bg-white border-t">
               <x-forms.input-label for="view-create_comment" :value="__('Add Comment')" />
               <x-forms.text-area id="view-create_comment" rows="4" class="text-sm" />
               <x-forms.input-error id="error_view-create_comment"></x-forms.input-error>
               <div class="mt-2">
-                <button id="btn-submit-view-create-comment" type="button" class="btn btn-sm btn-primary">{{ __('Submit')
+                <button id="btn-submit-view-create-comment" type="button" class="btn btn-sm btn-primary">{{
+                  __('Submit')
                   }}</button>
               </div>
+            </div>
+          </div>
+          <div class="loader absolute inset-0 bg-white flex items-center justify-center w-full h-full"
+            style="display: none">
+            <div role="status">
+              <svg aria-hidden="true" class="w-8 h-8 mr-2 text-gray-200 animate-spin fill-indigo-600"
+                viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                  fill="currentColor" />
+                <path
+                  d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                  fill="currentFill" />
+              </svg>
+              <span class="sr-only">Loading...</span>
             </div>
           </div>
         </div>
@@ -191,7 +212,9 @@
 <script type="text/javascript">
   $(function () {
 
-    const load_item_request = (id) => {
+    const load_item_request = (id, openmodal = false) => {
+      $('.view-request-modal .modal-box').css('overflow-y', 'hidden');
+      $('.view-request-modal .modal-box .loader').show();
       $.ajax({
         url: `api/item_request/` + id,
         type: "GET",
@@ -206,18 +229,27 @@
           $('#view--data-salesman_name').text('');
           $('#view--data-salesman_whatsapp').text('');
           $("#view_product_id").val('');
+          $('#view-product_sku').hide();
           $('#view--data-product_sku').text('');
+          $('#view-product_brand').hide();
           $('#view--data-product_brand').text('');
+          $('#view-product_year').hide();
           $('#view--data-product_year').text('');
+          $('#view-product_cc').hide();
           $('#view--data-product_cc').text('');
+          $('#view-product_engine').hide();
           $('#view--data-product_engine').text('');
+          $('#view-product_price_buy').hide();
           $('#view--data-product_price_buy').html('');
           $('#view--input-product_price_buy').val('');
+          $('#view-product_price_resell').hide();
           $('#view--data-product_price_resell').html('');
           $('#view--input-product_price_resell').val('');
+          $('#view-product_price_retail').hide();
           $('#view--data-product_price_retail').html('');
-          $('#view--input-product_price_resell').val('');
+          $('#view--input-product_price_retail').val('');
           $('#comments').html('');
+          $('#view-create_comment').val('');
           //console.log(response);
           //open modal
           let request_date = response.data.request_date.split(' ')[0];
@@ -288,22 +320,34 @@
             let len = comments.length;
             //console.log(comments);
             for (let i = 0; i < len; i++) {
-              comment = '<div class="bg-white px-3 pt-1.5 pb-2 md:px-4 md:pt-2 md:pb-2.5 rounded-lg">'
-                + '<div class="mb-1"><span class="font-bold text-xs">' + comments[i].user.name + '</span>&nbsp;&nbsp;<span class="text-xs text-slate-400">' + new Date(comments[i].created_at).toLocaleString('id-ID') + '</span></div>'
+              if (comments[i].user.id == $("#view_user_id").val()) {
+                comment = '<div class="relative bg-indigo-100 shadow-sm px-3 pt-1.5 pb-2 ml-2 md:px-4 md:pt-2 md:pb-2.5 rounded-lg max-w-[80%] text-left self-start before:absolute before:w-0 before:h-0 before:-left-3 before:right-auto before:top-0 before:bottom-auto before:border-[12px] before:border-solid before:border-t-indigo-100 before:border-r-transparent before:border-b-transparent before:border-l-transparent">';
+              } else {
+                comment = '<div class="relative bg-white shadow-sm px-3 pt-1.5 pb-2 mr-2 md:px-4 md:pt-2 md:pb-2.5 rounded-lg max-w-[80%] text-right self-end before:absolute before:w-0 before:h-0 before:-right-3 before:left-auto before:top-0 before:bottom-auto before:border-[12px] before:border-solid before:border-t-white before:border-r-transparent before:border-b-transparent before:border-l-transparent">';
+              }
+
+                comment += '<div class="mb-1"><span class="font-bold text-xs">' + comments[i].user.name + '</span>&nbsp;&nbsp;<span class="text-xs text-slate-400">' + new Date(comments[i].created_at).toLocaleString('id-ID') + '</span></div>'
                 + '<div class="text-sm">' + comments[i].comment + '</div>'
                 + '</div>';
+
               $('#comments').append(comment);
             }
             //$('#view--data-notes').text(notes);
           }
-          $('#view-item-request').prop('checked', true);
+
+          $('.view-request-modal .modal-box').css('overflow-y', 'auto');
+          $('.view-request-modal .modal-box .loader').hide();
+
+          if (openmodal) {
+            $('#view-item-request').prop('checked', true);
+          }
 
         }
       });
     }
-    // let item_request_id = '23001';
-    // $("#view_item_id").val('23001');
-    // load_item_request(item_request_id);
+    let item_request_id = '23001';
+    $("#view_item_id").val('23001');
+    load_item_request(item_request_id, true);
 
     $(document).on("click", "#btn-submit-view-create-comment", function(e) {
       e.preventDefault();
@@ -311,6 +355,9 @@
       let comment = $('#view-create_comment').val();
       let user_id = $('#view_user_id').val();
       let token   = $("meta[name='csrf-token']").attr("content");
+
+      $('.view-request-modal .modal-box').css('overflow-y', 'hidden');
+      $('.view-request-modal .modal-box .loader').show();
       //console.log(status_id);
       $.ajax({
         url: `/api/comment`,
@@ -323,8 +370,9 @@
           "_token": token
         },
         success: function(response) {
+          load_item_request(item_request_id, true);
           //$('#edit-item-request').prop('checked', false);
-          window.location.href = "{{url('/item_request?status=comment-created')}}";
+          //window.location.href = "{{url('/item_request?status=comment-created')}}";
         },
         error: function(error) {
           console.log(error);
@@ -345,7 +393,7 @@
       e.preventDefault();
       let item_request_id = $(this).closest('tr').attr("id");
       $("#view_item_id").val($(this).closest('tr').attr("id"));
-      load_item_request(item_request_id);
+      load_item_request(item_request_id, true);
     });
 
     $(document).on("click", "#view--btn-show-update-product_buy_price", function(e) {
@@ -408,6 +456,9 @@
       let product_price_resell = $('#view--input-product_price_resell').val();
       let product_price_retail = $('#view--input-product_price_retail').val();
       let token   = $("meta[name='csrf-token']").attr("content");
+
+      $('.view-request-modal .modal-box').css('overflow-y', 'hidden');
+      $('.view-request-modal .modal-box .loader').show();
       //console.log(status_id);
       $.ajax({
         url: `/api/product/${view_product_id}`,
@@ -420,8 +471,11 @@
           "_token": token
         },
         success: function(response) {
+          $('#view--display-product_price_sell').show();
+          $('#view--update-product_price_sell').hide();
+          load_item_request(item_request_id, true);
           //$('#edit-item-request').prop('checked', false);
-          window.location.href = "{{url('/item_request?status=item_request-edited')}}";
+          //window.location.href = "{{url('/item_request?status=item_request-edited')}}";
         },
         error: function(error) {
           console.log(error);

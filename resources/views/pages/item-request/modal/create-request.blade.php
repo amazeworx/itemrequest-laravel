@@ -374,7 +374,8 @@
         },
         success: function(response) {
           $('#create-item-request').prop('checked', false);
-          window.location.href = "{{url('/item_request?status=item_request-created')}}";
+          $('#table-item-request').DataTable().ajax.reload();
+          //window.location.href = "{{url('/item_request?status=item_request-created')}}";
         },
         error: function(error) {
           //...

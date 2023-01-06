@@ -345,9 +345,9 @@
         }
       });
     }
-    let item_request_id = '23001';
-    $("#view_item_id").val('23001');
-    load_item_request(item_request_id, true);
+    // let item_request_id = '23001';
+    // $("#view_item_id").val('23001');
+    // load_item_request(item_request_id, true);
 
     $(document).on("click", "#btn-submit-view-create-comment", function(e) {
       e.preventDefault();

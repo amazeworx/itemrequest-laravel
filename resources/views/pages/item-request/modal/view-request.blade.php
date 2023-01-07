@@ -303,16 +303,25 @@
             $('#view--data-product_engine').text(product_engine);
           }
           if (product_price_buy) {
-            $('#view--input-product_price_buy').val(Math.round(product_price_buy));
-            $('#view--data-product_price_buy').html('Rp' + new Intl.NumberFormat('id-ID').format(product_price_buy)).show();
+            let price_buy = Math.round(product_price_buy);
+            if (price_buy != '0.00') {
+              $('#view--input-product_price_buy').val(Math.round(price_buy));
+              $('#view--data-product_price_buy').html('Rp' + new Intl.NumberFormat('id-ID').format(product_price_buy)).show();
+            }
           }
           if (product_price_resell) {
-            $('#view--input-product_price_resell').val(Math.round(product_price_resell));
+            let price_resell = Math.round(product_price_resell);
+            if (price_resell != '0.00') {
+              $('#view--input-product_price_resell').val(price_resell);
             $('#view--data-product_price_resell').html('Rp' + new Intl.NumberFormat('id-ID').format(product_price_resell) + ' <span class="text-xs text-slate-500 font-normal"> (Harga Toko)</span>').show();
+            }
           }
           if (product_price_retail) {
-            $('#view--input-product_price_retail').val(Math.round(product_price_retail));
+            let price_retail = Math.round(product_price_retail);
+            if (price_retail != '0.00') {
+            $('#view--input-product_price_retail').val(price_retail);
             $('#view--data-product_price_retail').html('Rp' + new Intl.NumberFormat('id-ID').format(product_price_retail) + ' <span class="text-xs text-slate-500 font-normal">(Harga User)</span>').show();
+            }
           }
           if (comments) {
             $('#comments-container').show();

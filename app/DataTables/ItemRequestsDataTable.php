@@ -135,7 +135,11 @@ class ItemRequestsDataTable extends DataTable
         ->content('-')
         ->renderRaw("
           function ( data ) {
-            return new Intl.NumberFormat('id-ID').format(data);
+            if (data == '0.00' | !data) {
+              return '-';
+            } else {
+              return new Intl.NumberFormat('id-ID').format(data);
+            }
           }
           ")
         ->title('Harga Toko');
@@ -147,7 +151,11 @@ class ItemRequestsDataTable extends DataTable
         ->content('-')
         ->renderRaw("
           function ( data ) {
-            return new Intl.NumberFormat('id-ID').format(data);
+            if (data == '0.00' | !data) {
+              return '-';
+            } else {
+              return new Intl.NumberFormat('id-ID').format(data);
+            }
           }
           ")
         ->title('Harga User');
@@ -158,7 +166,11 @@ class ItemRequestsDataTable extends DataTable
         ->responsivePriority(6)
         ->renderRaw("
           function ( data ) {
-            return new Intl.NumberFormat('id-ID').format(data);
+            if (data == '0.00' | !data) {
+              return '-';
+            } else {
+              return new Intl.NumberFormat('id-ID').format(data);
+            }
           }
           ")
         ->title('Harga Beli');

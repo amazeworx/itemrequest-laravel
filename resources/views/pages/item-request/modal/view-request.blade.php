@@ -371,6 +371,7 @@
         },
         success: function(response) {
           load_item_request($("#view_item_id").val(), true);
+          $('#table-item-request').DataTable().ajax.reload();
           //$('#edit-item-request').prop('checked', false);
           //window.location.href = "{{url('/item_request?status=comment-created')}}";
         },
@@ -424,8 +425,8 @@
         },
         success: function(response) {
           //$('#edit-item-request').prop('checked', false);
-          $('#view--display-product_price_sell').show();
-          $('#view--update-product_price_sell').hide();
+          $('#view--display-product_price_buy').show();
+          $('#view--update-product_price_buy').hide();
           load_item_request($("#view_item_id").val(), true);
           $('#table-item-request').DataTable().ajax.reload();
           //window.location.href = "{{url('/item_request?status=item_request-edited')}}";

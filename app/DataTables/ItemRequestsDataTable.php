@@ -32,6 +32,16 @@ class ItemRequestsDataTable extends DataTable
       })
       ->addColumn('control', function () {
       })
+      ->addColumn('comments', function (ItemRequest $itemRequest) {
+        $comments = $itemRequest->comments;
+        $output = "";
+        foreach ($comments as $comment) {
+          $output .= "[" . $comment->user->name . "] ";
+          $output .= $comment->comment . "; \n";
+        }
+        return nl2br($output);
+      })
+      ->rawColumns(['comments'])
       ->setRowId('id');
   }
 
@@ -48,9 +58,9 @@ class ItemRequestsDataTable extends DataTable
     $get_user = User::where('id', $user_id)->first();
 
     if ($get_user->hasRole('sales')) {
-      return ItemRequest::where('salesman_id', $user_id)->with(['product', 'customer', 'salesman', 'status', 'user']);
+      return ItemRequest::where('salesman_id', $user_id)->with(['product', 'customer', 'salesman', 'status', 'user', 'comments']);
     } else {
-      return ItemRequest::with(['product', 'customer', 'salesman', 'status', 'user']);
+      return ItemRequest::with(['product', 'customer', 'salesman', 'status', 'user', 'comments']);
     }
   }
 
@@ -64,7 +74,7 @@ class ItemRequestsDataTable extends DataTable
     return $this->builder()
       ->setTableId('table-item-request')
       //->addTableClass('responsive dt-responsive')
-      // ->responsive(["details" => ["type" => 'column', "target" => -1]])
+      ->responsive(["details" => ["type" => 'column', "target" => -1]])
       ->columns($this->getColumns())
       ->minifiedAjax()
       ->orderBy(0)
@@ -73,12 +83,12 @@ class ItemRequestsDataTable extends DataTable
       ->buttons($this->getButtons())
       ->lengthMenu([[10, 25, 50, 100, 250, 500, 1000, -1], [10, 25, 50, 100, 250, 500, 1000, "All"]])
       ->pageLength(10)
-      ->language(["search" => '<span class="hidden md:block">Search</span>', "searchPlaceholder" => 'Search records'])
-      ->parameters(
-        [
-          "responsive" => ["details" => ["type" => 'column', "target" => -1]]
-        ]
-      );
+      ->language(["search" => '<span class="hidden md:block">Search</span>', "searchPlaceholder" => 'Search records']);
+    // ->parameters(
+    //   [
+    //     "responsive" => ["details" => ["type" => 'column', "target" => -1]]
+    //   ]
+    // );
   }
 
   public function getButtons(): array
@@ -160,6 +170,20 @@ class ItemRequestsDataTable extends DataTable
         ->title('Sales');
       array_push($columns, $salesman);
     }
+    // $comments = Column::make('comments')
+    //   ->responsivePriority(2)
+    //   ->title('Comments');
+    // array_push($columns, $comments);
+
+    $comments = Column::computed('comments')
+      ->title('Comments')
+      ->exportable(true)
+      ->orderable(false)
+      ->printable(false)
+      ->hidden()
+      ->responsivePriority(10);
+    array_push($columns, $comments);
+
     $status = Column::make('status.name')
       ->responsivePriority(2)
       ->title('Status');
@@ -192,6 +216,8 @@ class ItemRequestsDataTable extends DataTable
       ->responsivePriority(9)
       ->addClass('none');
     array_push($columns, $product_engine);
+
+
 
     // $created_by = Column::make('user.name')
     //   ->title('Created By')

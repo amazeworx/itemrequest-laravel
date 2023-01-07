@@ -1,6 +1,6 @@
 {
   "name": "Item Request",
-  "short_name": "IR",
+  "short_name": "Item Request",
   "start_url": "/index.php",
   "background_color": "#6777ef",
   "description": "Item Request App",

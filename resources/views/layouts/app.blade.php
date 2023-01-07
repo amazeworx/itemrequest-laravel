@@ -8,11 +8,6 @@
   <meta name="theme-color" content="#641AE5" />
   <link rel="manifest" href="{{ asset('/manifest.json') }}">
   <link rel="icon" sizes="512x512" href="{{ asset('logo-512x512.png') }}">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="application-name" content="Item Request">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="Item Request">
   <link rel="apple-touch-icon" href="{{ asset('logo-512x512.png') }}">
 
   <title>{{ config('app.name', 'Laravel') }}</title>

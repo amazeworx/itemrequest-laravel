@@ -1,0 +1,17 @@
+{
+  "name": "Item Request",
+  "short_name": "IR",
+  "start_url": "/index.php",
+  "background_color": "#6777ef",
+  "description": "Item Request App",
+  "display": "fullscreen",
+  "theme_color": "#6777ef",
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

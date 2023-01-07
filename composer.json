@@ -12,6 +12,7 @@
         "blade-ui-kit/blade-heroicons": "^2.0",
         "blade-ui-kit/blade-ui-kit": "^0.3.4",
         "guzzlehttp/guzzle": "^7.2",
+        "ladumor/laravel-pwa": "^0.0.3",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",

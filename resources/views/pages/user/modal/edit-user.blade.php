@@ -62,6 +62,18 @@
           </div>
 
           <div>
+            <x-input-label for="edit_password" :value="__('Password')" />
+            <x-forms.text-input id="edit_password" class="block mt-1 w-full" type="password" />
+            <div id="error_password" class="text-xs text-red-500 mt-1" style="display:none"></div>
+            <div id="error_edit_password" class="text-xs text-red-500 mt-1" style="display:none"></div>
+          </div>
+
+          <div>
+            <x-input-label for="edit_password_confirmation" :value="__('Confirm Password')" />
+            <x-text-input id="edit_password_confirmation" class="block mt-1 w-full" type="password" />
+          </div>
+
+          <div>
             <div class="flex justify-end items-center gap-2 pt-2">
               <button id="btn-cancel-edit-user" type="button" class="btn btn-ghost hover:bg-slate-200">{{
                 __('Cancel') }}</button>
@@ -81,17 +93,17 @@
     $(document).on("click", "#btn-edit-user", function(e) {
       $('#view-user').prop('checked', false);
       $('#edit-user').prop('checked', true);
-    });
-    $(document).on("click", "#btn-cancel-edit-user", function(e) {
-      $('#edit-user').prop('checked', false);
-    });
-    $(document).on("click", "#btn-submit-edit-user", function(e) {
       $('#edit_user_name').removeClass('input-error');
       $('#edit_user_email').removeClass('input-error');
       $('#edit_user_username').removeClass('input-error');
       $('#edit_user_whatsapp').removeClass('input-error');
       $('#edit_user_role').removeClass('input-error');
-
+      $('#edit_password').removeClass('input-error');
+    });
+    $(document).on("click", "#btn-cancel-edit-user", function(e) {
+      $('#edit-user').prop('checked', false);
+    });
+    $(document).on("click", "#btn-submit-edit-user", function(e) {
       let user_id = $('#edit_user_id').val();
       console.log(user_id);
       let name = $('#edit_user_name').val();
@@ -100,6 +112,8 @@
       let whatsapp = $('#edit_user_whatsapp').val();
       let role = $('#edit_user_role').val();
       let status = $('#edit_user_status').val();
+      let password = $('#edit_password').val();
+      let password_confirmation = $('#edit_password_confirmation').val();
       let token   = $("meta[name='csrf-token']").attr("content");
 
       $.ajax({
@@ -113,11 +127,20 @@
           "whatsapp": whatsapp,
           "role": role,
           "active": status,
+          "password": password,
+          "password_confirmation": password_confirmation,
           "_token": token
         },
         success: function(response) {
           $('#edit-user').prop('checked', false);
-          console.log(response);
+          $('#edit_user_name').removeClass('input-error');
+          $('#edit_user_email').removeClass('input-error');
+          $('#edit_user_username').removeClass('input-error');
+          $('#edit_user_whatsapp').removeClass('input-error');
+          $('#edit_user_role').removeClass('input-error');
+          $('#edit_password').removeClass('input-error');
+          $('#table-users').DataTable().ajax.reload();
+          //console.log(response);
           //window.location.href = "{{url('/user?status=user-edited')}}";
         },
         error: function(error) {
@@ -151,6 +174,13 @@
           } else {
             $('#edit_user_role').removeClass('input-error');
             $('#error_edit_user_role').hide();
+          }
+          if(error.responseJSON.password) {
+            $('#edit_password').addClass('input-error');
+            $('#error_edit_password').text(error.responseJSON.password).show();
+          } else {
+            $('#password').removeClass('input-error');
+            $('#error_edit_password').hide();
           }
         }
       });

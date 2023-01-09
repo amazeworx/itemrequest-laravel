@@ -385,7 +385,9 @@
           //window.location.href = "{{url('/item_request?status=comment-created')}}";
         },
         error: function(error) {
-          console.log(error);
+          //console.log(error);
+          $('.view-request-modal .modal-box').css('overflow-y', 'auto');
+          $('.view-request-modal .modal-box .loader').hide();
           if(error.responseJSON.comment) {
             $('#view-create_comment').addClass('input-error');
             $('#error_view-create_comment').text(error.responseJSON.comment).show();
@@ -441,7 +443,7 @@
           //window.location.href = "{{url('/item_request?status=item_request-edited')}}";
         },
         error: function(error) {
-          console.log(error);
+          //console.log(error);
           if(error.responseJSON.price_buy) {
             $('#view--input-product_price_buy').addClass('input-error');
             $('#error_product_price_buy').text(error.responseJSON.price_buy).show();

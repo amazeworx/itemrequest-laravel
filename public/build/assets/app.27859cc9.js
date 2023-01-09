@@ -11845,6 +11845,14 @@ var defaultModifiers = [eventListeners, popperOffsets$1, computeStyles$1, applyS
 var createPopper = /* @__PURE__ */ popperGenerator({
   defaultModifiers
 });
+window.addEventListener("load", function() {
+  window.history.pushState({ noBackExitsApp: true }, "");
+});
+window.addEventListener("popstate", function(event) {
+  if (event.state && event.state.noBackExitsApp) {
+    window.history.pushState({ noBackExitsApp: true }, "");
+  }
+});
 window.createPopper = createPopper;
 window.Alpine = module_default;
 module_default.start();

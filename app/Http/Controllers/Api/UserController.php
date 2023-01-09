@@ -127,11 +127,20 @@ class UserController extends Controller
    */
   public function update(Request $request, User $user)
   {
-    $validator = Validator::make($request->all(), [
-      'name' => ['required', 'string', 'max:255'],
-      'username' => ['required', 'string', 'max:255'],
-      'role' => ['required'],
-    ]);
+    if ($request->password) {
+      $validator = Validator::make($request->all(), [
+        'name' => ['required', 'string', 'max:255'],
+        'username' => ['required', 'string', 'max:255'],
+        'role' => ['required'],
+        'password' => ['confirmed', Rules\Password::defaults()],
+      ]);
+    } else {
+      $validator = Validator::make($request->all(), [
+        'name' => ['required', 'string', 'max:255'],
+        'username' => ['required', 'string', 'max:255'],
+        'role' => ['required'],
+      ]);
+    }
 
     if ($validator->fails()) {
       return response()->json($validator->errors(), 422);
@@ -153,6 +162,25 @@ class UserController extends Controller
       'whatsapp' => $request->whatsapp,
       'active' => $request->active,
     ]);
+
+    if ($request->password) {
+      $user->update([
+        'name' => $request->name,
+        'email' => $request->email,
+        'username' => $request->username,
+        'whatsapp' => $request->whatsapp,
+        'active' => $request->active,
+        'password' => Hash::make($request->password),
+      ]);
+    } else {
+      $user->update([
+        'name' => $request->name,
+        'email' => $request->email,
+        'username' => $request->username,
+        'whatsapp' => $request->whatsapp,
+        'active' => $request->active,
+      ]);
+    }
 
     $user->syncRoles([$role]);
 

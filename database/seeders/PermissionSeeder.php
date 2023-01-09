@@ -115,54 +115,54 @@ class PermissionSeeder extends Seeder
     $purchasingRole->givePermissionTo('edit product buy price');
 
     // create demo users
-    $user = User::factory()->create([
-      'name' => 'John Wick',
-      'username' => 'johnwick',
-      'email' => 'johnwick@yopmail.com',
-      'whatsapp' => '08123456789',
-      'active' => 1,
-      'password' => bcrypt('11223344')
-    ]);
-    $user->assignRole($superadminRole);
+    // $user = User::factory()->create([
+    //   'name' => 'John Wick',
+    //   'username' => 'johnwick',
+    //   'email' => 'johnwick@yopmail.com',
+    //   'whatsapp' => '08123456789',
+    //   'active' => 1,
+    //   'password' => bcrypt('11223344')
+    // ]);
+    // $user->assignRole($superadminRole);
 
-    $user = User::factory()->create([
-      'name' => 'Bruce Wayne',
-      'username' => 'brucewayne',
-      'email' => 'brucewayne@yopmail.com',
-      'whatsapp' => '08123456789',
-      'active' => 1,
-      'password' => bcrypt('11223344')
-    ]);
-    $user->assignRole($salesRole);
+    // $user = User::factory()->create([
+    //   'name' => 'Bruce Wayne',
+    //   'username' => 'brucewayne',
+    //   'email' => 'brucewayne@yopmail.com',
+    //   'whatsapp' => '08123456789',
+    //   'active' => 1,
+    //   'password' => bcrypt('11223344')
+    // ]);
+    // $user->assignRole($salesRole);
 
-    $user = User::factory()->create([
-      'name' => 'Clark Kent',
-      'username' => 'clarkkent',
-      'email' => 'clarkkent@yopmail.com',
-      'whatsapp' => '08123456789',
-      'active' => 1,
-      'password' => bcrypt('11223344')
-    ]);
-    $user->assignRole($salesRole);
+    // $user = User::factory()->create([
+    //   'name' => 'Clark Kent',
+    //   'username' => 'clarkkent',
+    //   'email' => 'clarkkent@yopmail.com',
+    //   'whatsapp' => '08123456789',
+    //   'active' => 1,
+    //   'password' => bcrypt('11223344')
+    // ]);
+    // $user->assignRole($salesRole);
 
-    $user = User::factory()->create([
-      'name' => 'Gal Gadot',
-      'username' => 'galgadot',
-      'email' => 'galgadot@yopmail.com',
-      'whatsapp' => '08123456789',
-      'active' => 1,
-      'password' => bcrypt('11223344')
-    ]);
-    $user->assignRole($purchasingRole);
+    // $user = User::factory()->create([
+    //   'name' => 'Gal Gadot',
+    //   'username' => 'galgadot',
+    //   'email' => 'galgadot@yopmail.com',
+    //   'whatsapp' => '08123456789',
+    //   'active' => 1,
+    //   'password' => bcrypt('11223344')
+    // ]);
+    // $user->assignRole($purchasingRole);
 
-    $user = User::factory()->create([
-      'name' => 'Black Widow',
-      'username' => 'blackwidow',
-      'email' => 'blackwidow@yopmail.com',
-      'whatsapp' => '08123456789',
-      'active' => 1,
-      'password' => bcrypt('11223344')
-    ]);
-    $user->assignRole($purchasingRole);
+    // $user = User::factory()->create([
+    //   'name' => 'Black Widow',
+    //   'username' => 'blackwidow',
+    //   'email' => 'blackwidow@yopmail.com',
+    //   'whatsapp' => '08123456789',
+    //   'active' => 1,
+    //   'password' => bcrypt('11223344')
+    // ]);
+    // $user->assignRole($purchasingRole);
   }
 }

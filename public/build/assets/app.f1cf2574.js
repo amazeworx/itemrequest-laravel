@@ -7247,6 +7247,22 @@ const axios$1 = axios;
 window._ = _;
 window.axios = axios$1;
 window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
+function isStandalone() {
+  return !!navigator.standalone || window.matchMedia("(display-mode: standalone)").matches;
+}
+function exitsOnBack() {
+  return isStandalone() && browserInfo.os.name === "Android";
+}
+if (exitsOnBack())
+  handleBackEvents();
+function handleBackEvents() {
+  window.history.pushState({}, "");
+  window.addEventListener("popstate", () => {
+    setTimeout(() => {
+      window.history.pushState({}, "");
+    }, 2e3);
+  });
+}
 window._buildUrl = function(dt, action) {
   let url = dt.ajax.url() || "";
   let params = dt.ajax.params();
@@ -11844,14 +11860,6 @@ function popperGenerator(generatorOptions) {
 var defaultModifiers = [eventListeners, popperOffsets$1, computeStyles$1, applyStyles$1, offset$1, flip$1, preventOverflow$1, arrow$1, hide$1];
 var createPopper = /* @__PURE__ */ popperGenerator({
   defaultModifiers
-});
-window.addEventListener("load", function() {
-  window.history.pushState({ noBackExitsApp: true }, "");
-});
-window.addEventListener("popstate", function(event) {
-  if (event.state && event.state.noBackExitsApp) {
-    window.history.pushState({ noBackExitsApp: true }, "");
-  }
 });
 window.createPopper = createPopper;
 window.Alpine = module_default;

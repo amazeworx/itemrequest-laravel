@@ -145,6 +145,7 @@ class ItemRequestController extends Controller
         'price_buy' => $product->price_buy,
         'price_resell' => $product->price_resell,
         'price_retail' => $product->price_retail,
+        'supplier' => $item->supplier,
         'notes' => $product->notes,
       ],
       'status' => [
@@ -183,6 +184,10 @@ class ItemRequestController extends Controller
     if ($action == 'update-status') {
       $itemRequest->update([
         'status_id' => $request->status_id,
+      ]);
+    } else if ($action == 'update-supplier') {
+      $itemRequest->update([
+        'supplier' => $request->supplier,
       ]);
     } else {
       //define validation rules

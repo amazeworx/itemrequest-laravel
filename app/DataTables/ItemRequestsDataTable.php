@@ -201,6 +201,14 @@ class ItemRequestsDataTable extends DataTable
       ->title('Status');
     array_push($columns, $status);
 
+    if (auth()->user()->hasAnyRole(['super-admin', 'purchasing'])) {
+      $supplier = Column::make('supplier')
+        ->title('Supplier')
+        ->content('-')
+        ->responsivePriority(5);
+      array_push($columns, $supplier);
+    }
+
     $product_brand = Column::make('product.brand')
       ->title('Merk Mobil')
       ->content('-')

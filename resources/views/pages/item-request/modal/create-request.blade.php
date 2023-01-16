@@ -19,6 +19,13 @@
 
             <input type="hidden" id="create_salesman_id" value="{{ $current_user_id }}" />
 
+            @role('sales')
+            <input type="hidden" id="is_salesman" value="{{ $current_user_id }}" />
+            @else
+            <input type="hidden" id="is_salesman" value="false" />
+            @endrole
+
+
             <input type="hidden" id="create_status_id" value="1" />
 
             <div>
@@ -216,6 +223,9 @@
         url: `/api/customer`,
         type: "GET",
         cache: false,
+        data: {
+          "is_salesman": $("#is_salesman").val(),
+        },
         success: function(response) {
           //resolve(response);
           //console.log(response)

@@ -45,6 +45,9 @@ $current_user_id = auth()->user()->id;
   {{-- Edit Customer Modal --}}
   @include('pages.customer.modal.edit-customer')
 
+  {{-- Import Customer Modal --}}
+  @include('pages.customer.modal.import-customer')
+
   @push('scripts')
   <script type="text/javascript">
     $(function () {

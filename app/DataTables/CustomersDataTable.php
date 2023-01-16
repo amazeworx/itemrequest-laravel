@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Customer;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -11,9 +12,11 @@ use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use Spatie\Permission\Traits\HasRoles;
 
 class CustomersDataTable extends DataTable
 {
+  use HasRoles;
   /**
    * Build DataTable class.
    *
@@ -37,7 +40,15 @@ class CustomersDataTable extends DataTable
   public function query(Customer $model): QueryBuilder
   {
     //return $model->newQuery();
-    return Customer::with(['customertype', 'currentsalesman', 'user']);
+    //return Customer::with(['customertype', 'currentsalesman', 'user']);
+    $user_id = $this->user_id;
+    $get_user = User::where('id', $user_id)->first();
+
+    if ($get_user->hasRole('sales')) {
+      return Customer::where('current_salesman_id', $user_id)->with(['customertype', 'currentsalesman', 'user']);
+    } else {
+      return Customer::with(['customertype', 'currentsalesman', 'user']);
+    }
   }
 
   /**
@@ -90,6 +101,15 @@ class CustomersDataTable extends DataTable
         ->content('-')
         //->addClass('none')
         ->responsivePriority(3),
+      Column::make('currentsalesman.id')
+        ->title('Sales ID')
+        ->content('-')
+        //->addClass('none')
+        ->responsivePriority(3)
+        ->orderable(false)
+        ->printable(false)
+        ->exportable(true)
+        ->hidden(),
       Column::make('previous_salesman')
         ->title('Sales Sebelumnya')
         ->content('-')
@@ -135,16 +155,16 @@ class CustomersDataTable extends DataTable
         ->text('<i class="uil uil-file-upload"></i><span>Export</span>');
       array_push($buttons, $button_export);
     }
-    // if (auth()->user()->can('import customers')) {
-    //   $button_import = [
-    //     "text" => '<i class="uil uil-file-download"></i><span>Import</span>',
-    //     "action" => "function ( e, dt, node, config ) {
-    //         $('#import-customer').prop('checked', true);
-    //       }",
-    //     "className" => 'btn-primary'
-    //   ];
-    //   array_push($buttons, $button_import);
-    // }
+    if (auth()->user()->can('import customers')) {
+      $button_import = [
+        "text" => '<i class="uil uil-file-download"></i><span>Import</span>',
+        "action" => "function ( e, dt, node, config ) {
+            $('#import-customer').prop('checked', true);
+          }",
+        "className" => 'btn-primary'
+      ];
+      array_push($buttons, $button_import);
+    }
     return $buttons;
   }
 

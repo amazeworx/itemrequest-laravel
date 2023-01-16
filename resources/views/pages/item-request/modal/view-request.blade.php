@@ -5,7 +5,24 @@
       <label for="view-item-request" class="btn btn-sm btn-circle absolute right-3 top-4">✕</label>
       <div>
         <div class="py-4 px-4 sm:pt-6 sm:px-6">
-          <h3 class="text-xl font-semibold text-gray-900">{{ __('Item Request Detail') }}</h3>
+          <div class="flex flex-col gap-y-4 md:flex-row md:items-center md:gap-x-4">
+            <h3 class="text-xl font-semibold text-gray-900">{{ __('Item Request Detail') }}</h3>
+            @canany('edit requests|delete requests')
+            <div>
+              <div class="flex md:justify-end items-center gap-2">
+                {{-- @can('edit requests')
+                <button id="btn-edit-request" type="button" class="btn btn-sm btn-outline btn-primary">{{
+                  __('Edit')
+                  }}</button>
+                @endcan --}}
+                @can('delete requests')
+                <button id="btn-delete-request" type="button" class="btn btn-xs btn-error">{{
+                  __('Delete') }}</button>
+                @endcan
+              </div>
+            </div>
+            @endcanany
+          </div>
         </div>
 
         <input type="hidden" id="view_item_id">
@@ -44,32 +61,59 @@
             </div>
 
             @can('view product buy price')
-            <div class="py-1.5">
-              <div class="font-semibold text-xs md:text-sm text-slate-400 uppercase sm:mb-1">Harga Beli</div>
-              <div id="view--display-product_price_buy">
-                <div class="flex">
-                  <div id="view--data-product_price_buy" class="font-bold text-sm sm:text-base mr-4"
-                    style="display: none">
+            <div class="grid grid-cols-1 md:grid-cols-2">
+              <div class="py-1.5 md:pr-2">
+                <div class="font-semibold text-xs md:text-sm text-slate-400 uppercase sm:mb-1">Harga Beli</div>
+                <div id="view--display-product_price_buy">
+                  <div class="flex">
+                    <div id="view--data-product_price_buy" class="font-bold text-sm sm:text-base mr-4"
+                      style="display: none">
+                    </div>
+                    @can('create product buy price')
+                    <button type="button" id="view--btn-show-update-product_buy_price"
+                      class="link link-primary text-xs">Set
+                      Harga
+                      Beli</button>
+                    @endcan
                   </div>
-                  @can('create product buy price')
-                  <button type="button" id="view--btn-show-update-product_buy_price"
-                    class="link link-primary text-xs">Set
-                    Harga
-                    Beli</button>
-                  @endcan
+                </div>
+                <div id="view--update-product_price_buy" class="hidden">
+                  <x-forms.text-input id="view--input-product_price_buy" type="text"
+                    class="mt-1 block w-full max-w-xs" />
+                  <x-forms.input-error id="error_product_price_buy"></x-forms.input-error>
+                  <div class="flex gap-2 mt-2">
+                    <button type="button" id="view--btn-submit-update-product_price_buy"
+                      class="btn btn-primary btn-sm">Update</button>
+                    <button type="button" id="view--btn-cancel-update-product_price_buy"
+                      class="btn btn-ghost btn-sm">Cancel</button>
+                  </div>
                 </div>
               </div>
-              <div id="view--update-product_price_buy" class="hidden">
-                <x-forms.text-input id="view--input-product_price_buy" type="text" class="mt-1 block w-full max-w-xs" />
-                <x-forms.input-error id="error_product_price_buy"></x-forms.input-error>
-                <div class="flex gap-2 mt-2">
-                  <button type="button" id="view--btn-submit-update-product_price_buy"
-                    class="btn btn-primary btn-sm">Update</button>
-                  <button type="button" id="view--btn-cancel-update-product_price_buy"
-                    class="btn btn-ghost btn-sm">Cancel</button>
+              <div class="py-1.5 md:pl-2">
+                <div class="font-semibold text-xs md:text-sm text-slate-400 uppercase sm:mb-1">Supplier</div>
+                <div id="view--display-product_supplier">
+                  <div class="flex">
+                    <div id="view--data-product_supplier" class="font-bold text-sm sm:text-base mr-4"
+                      style="display: none">
+                    </div>
+                    @hasanyrole('purchasing|super-admin')
+                    <button type="button" id="view--btn-show-update-product_supplier"
+                      class="link link-primary text-xs">Set Supplier</button>
+                    @endhasanyrole
+                  </div>
+                </div>
+                <div id="view--update-product_supplier" class="hidden">
+                  <x-forms.text-input id="view--input-product_supplier" type="text"
+                    class="mt-1 block w-full max-w-xs" />
+                  <x-forms.input-error id="error_product_supplier"></x-forms.input-error>
+                  <div class="flex gap-2 mt-2">
+                    <button type="button" id="view--btn-submit-update-product_supplier"
+                      class="btn btn-primary btn-sm">Update</button>
+                    <button type="button" id="view--btn-cancel-update-product_supplier"
+                      class="btn btn-ghost btn-sm">Cancel</button>
+                  </div>
                 </div>
               </div>
-
             </div>
             @endcan
 
@@ -112,6 +156,7 @@
             </div>
             @endcanany
 
+
             <div class="grid grid-cols-1 md:grid-cols-2">
               <div class="py-1.5 md:pr-2">
                 <div class="font-semibold text-xs md:text-sm text-slate-400 uppercase sm:mb-1">Status</div>
@@ -147,7 +192,7 @@
                 </div>
               </div>
               @endcan
-              @role('purchasing')
+              @hasanyrole('purchasing')
               <div class="py-1.5 md:pl-2">
                 <div class="font-semibold text-xs md:text-sm text-slate-400 uppercase sm:mb-1">Sales</div>
                 <div>
@@ -155,7 +200,7 @@
                     class="text-slate-400 text-sm">(<span id="view--data-salesman_whatsapp"></span>)</span>
                 </div>
               </div>
-              @endrole
+              @endhasanyrole
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2">
               <div class="py-1.5 md:pr-2">
@@ -248,6 +293,8 @@
           $('#view-product_price_retail').hide();
           $('#view--data-product_price_retail').html('');
           $('#view--input-product_price_retail').val('');
+          $('#view--data-product_supplier').html('');
+          $('#view--input-product_supplier').val('');
           $('#comments').html('');
           $('#view-create_comment').val('');
           //console.log(response);
@@ -261,6 +308,7 @@
           let customer_type = response.data.customer.customer_type.name;
           let salesman_name = response.data.salesman.name;
           let salesman_whatsapp = response.data.salesman.whatsapp;
+          let product_supplier = response.data.product.supplier;
           let product_id = response.data.product.id;
           let product_name = response.data.product.name;
           let product_sku = response.data.product.sku;
@@ -322,6 +370,11 @@
             $('#view--input-product_price_retail').val(price_retail);
             $('#view--data-product_price_retail').html('Rp' + new Intl.NumberFormat('id-ID').format(product_price_retail) + ' <span class="text-xs text-slate-500 font-normal">(Harga User)</span>').show();
             }
+          }
+          if (product_supplier) {
+            $('#view--data-product_supplier').show();
+            $('#view--data-product_supplier').text(product_supplier);
+            $('#view--input-product_supplier').val(product_supplier);
           }
           if (comments) {
             $('#comments-container').show();
@@ -455,6 +508,46 @@
       });
     });
 
+    $(document).on("click", "#view--btn-show-update-product_supplier", function(e) {
+      e.preventDefault();
+      $('#view--display-product_supplier').hide();
+      $('#view--update-product_supplier').show();
+      $('#view--input-product_supplier').focus();
+    });
+    $(document).on("click", "#view--btn-cancel-update-product_supplier", function(e) {
+      e.preventDefault();
+      $('#view--display-product_supplier').show();
+      $('#view--update-product_supplier').hide();
+    });
+    $('#view--btn-submit-update-product_supplier').click(function (e) {
+      e.preventDefault();
+      let view_item_id = $("#view_item_id").val();
+      let product_supplier = $('#view--input-product_supplier').val();
+      let token   = $("meta[name='csrf-token']").attr("content");
+      //console.log(status_id);
+      $.ajax({
+        url: `/api/item_request/${view_item_id}`,
+        type: "PUT",
+        cache: false,
+        data: {
+          "action" : "update-supplier",
+          "supplier": product_supplier,
+          "_token": token
+        },
+        success: function(response) {
+          //$('#edit-item-request').prop('checked', false);
+          $('#view--display-product_supplier').show();
+          $('#view--update-product_supplier').hide();
+          load_item_request($("#view_item_id").val(), true);
+          $('#table-item-request').DataTable().ajax.reload();
+          //window.location.href = "{{url('/item_request?status=item_request-edited')}}";
+        },
+        error: function(error) {
+          //console.log(error);
+        }
+      });
+    });
+
     $(document).on("click", "#view--btn-show-update-product_price_sell", function(e) {
       e.preventDefault();
       $('#view--display-product_price_sell').hide();
@@ -580,6 +673,42 @@
           //...
         }
       });
+    });
+
+    /*
+      * Delete Item Request
+      */
+    $(document).on("click", "#btn-delete-request", function(e) {
+      e.preventDefault();
+      //console.log('clicked');
+      const item_id = $('#view_item_id').val();
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'You won\'t be able to revert this!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel!',
+      }).then(function (e) {
+        //console.log(e);
+        if (e.value === true) {
+          var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+          $.ajax({
+            type: 'DELETE',
+            url: "{{url('/api/item_request')}}/" + item_id,
+            data: {_token: CSRF_TOKEN},
+            dataType: 'JSON',
+            success: function (results) {
+              //console.log(results);
+              window.location.href = "{{url('/item_request?status=item_request-deleted')}}";
+            }
+          });
+        } else {
+          e.dismiss;
+        }
+      }, function (dismiss) {
+        return false;
+      })
     });
   });
 </script>

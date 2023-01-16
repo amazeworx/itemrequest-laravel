@@ -118,6 +118,24 @@ $current_user_id = auth()->user()->id;
           window.history.replaceState({}, document.title, "/" + "item_request");
         });
       }
+      if (status == 'item_request-deleted') {
+        Swal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: 'success',
+          text: 'Item Request berhasil dihapus',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 3000,
+          iconColor: 'white',
+          customClass: {
+            popup: 'colored-toast'
+          },
+        }).then(function (e) {
+          //console.log(e);
+          window.history.replaceState({}, document.title, "/" + "item_request");
+        });
+      }
       if (status == 'item_request-imported') {
         Swal.fire({
           toast: true,

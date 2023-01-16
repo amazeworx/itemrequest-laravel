@@ -1,9 +1,9 @@
 <div class="edit-request-modal">
   <input type="checkbox" id="edit-item-request" class="modal-toggle" />
-  <div class="modal z-40">
+  <div class="modal modal-bottom md:modal-middle z-40">
     <div class="modal-box p-0 relative">
       <label for="edit-item-request" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-      <div class="p-6">
+      <div class="p-4 sm:p-6">
         <h3 class="mb-4 text-xl font-medium text-gray-900">{{ __('Edit Item Request') }}</h3>
         <div class="mt-6 space-y-4">
 

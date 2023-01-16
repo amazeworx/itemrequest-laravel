@@ -34,9 +34,13 @@ class CustomerController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function index()
+  public function index(Request $request)
   {
-    $customers = Customer::orderBy('name', 'asc')->get();
+    if ($request->is_salesman !== 'false') {
+      $customers = Customer::where('current_salesman_id', $request->is_salesman)->orderBy('name', 'asc')->get();
+    } else {
+      $customers = Customer::orderBy('name', 'asc')->get();
+    }
     return response()->json($customers);
   }
 
